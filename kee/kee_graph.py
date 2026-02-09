@@ -105,9 +105,9 @@ class Graph(Scene):
    
         arrow_7 = self.make_arrow(start = a1_top, end = d_right, label = "0, 1", label_shift=0.15)
         
-        arrow_8 = self.make_arrow(start = a2_top, end = d_right, label = "0, 1", label_shift=0.14)
+        arrow_8 = self.make_arrow(start = a2_top, end = d_right, label = "0, 1", label_shift=0.14).shift(UP * 0.07)
        
-        arrow_9 = self.make_arrow(start = a1_bot, end = d_right, label = "0, 1", label_shift=0.13)
+        arrow_9 = self.make_arrow(start = a1_bot, end = d_right, label = "0, 1", label_shift=0.13).shift(DOWN * 0.07)
    
         arrow_10 = self.make_arrow(start = a1_bot_bot, end = d_right,label = "0, 1", label_shift=0.12)
 
