@@ -39,7 +39,7 @@ class Graph(Scene):
         In this case, it can be node objects from make_node()
         """
         
-        arrow = Arrow(start = start, end = end, color = color, tip_shape = tip_shape, stroke_width = 2.5, buff = 0, tip_length = 0.04).shift(LEFT * 0.04)
+        arrow = Arrow(start = start, end = end, color = color, tip_shape = tip_shape, stroke_width = 2.5, buff = 0, tip_length = 0.07).shift(LEFT * 0.04)
 
         angle = arrow.get_angle()
 
@@ -124,14 +124,16 @@ class Graph(Scene):
 
         arrow_11 = self.make_curved_arrow(d_right, color=text_black, label= "0, 1")
 
+        # Triangle 
+        triangle = Triangle(color = text_black, fill_opacity=1).rotate(270*DEGREES)
+        triangle.scale(0.2).shift(LEFT * 3.5 + DOWN * 0.25)
+
         
-
-
         all_nodes = VGroup(d_left, d_top, d_bot, d_right, a1_top, a2_top, a1_bot, a1_bot_bot)
        
         all_arrows = VGroup(arrow_1, arrow_2, arrow_3, arrow_4, arrow_5, arrow_6, arrow_7, arrow_8, arrow_9, arrow_10, arrow_11)
 
-        all_objects = VGroup(all_arrows, all_nodes).center()
+        all_objects = VGroup(all_arrows, all_nodes, triangle).center()
 
         self.add(all_objects)
         
