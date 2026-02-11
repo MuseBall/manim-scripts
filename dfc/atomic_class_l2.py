@@ -4,7 +4,11 @@ post link: https://www.lesswrong.com/posts/ieX8nK2b2i4JDRH5s/robust-finite-polic
 
 Images for Section in Atomic Classifiers
 Fig Caption: An atomic classifier for strings of length 2
+
+Generate image by simple running script:
+python ./atomic_class_l2.py
 """
+
 from manim import *
 import numpy as np
 
