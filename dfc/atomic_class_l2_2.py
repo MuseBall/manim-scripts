@@ -39,7 +39,7 @@ class Graph(Scene):
                                                 height = 8, width = 8)
 
     # Nodes 
-        d_left= make_node(position=[-3, 0, 0], label="d", node_color = node_blue)
+        d_left= make_node(position=[-3, 0, 0], label="d")
 
         d_top = make_node(position=[-0.75,2.25,0], label="d") 
 

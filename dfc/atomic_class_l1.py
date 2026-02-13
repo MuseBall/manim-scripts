@@ -1,14 +1,14 @@
 """
-TIME : 16:15 - 16:50
+TIME : 16:55 - 17:45
 
 Robust Finite Policies are Nontrivially Structured
 post link: https://www.lesswrong.com/posts/ieX8nK2b2i4JDRH5s/robust-finite-policies-are-nontrivially-structured
 
-Images for Section in Special Policies
-Fig Caption: A DFC for a default policy which always outputs the action d
+Images for Section in Atomic Classifier
+Fig Caption: A DFC where every input has a unique input alphabet character
 
 Generate image by simple running script:
-python ./dfc_d.py
+python ./atomic_class_l1.py
 """
 
 from manim import *
@@ -32,7 +32,6 @@ class Graph(Scene):
         node_blue = "#9acecc"
         node_orange = "#d49870"
         node_red = "#d67f86"
-        background_color = "#dce2e1" 
 
 
         # background rectangle with rounded corners
@@ -40,31 +39,39 @@ class Graph(Scene):
                                                 height = 8, width = 8)
 
     # Nodes 
-        d = make_node(position=[0,0,0], radius=0.4, label="d") 
+        d = make_node(position=[-2, 0, 0], label="", node_color = node_blue)
+
+        a1_top = make_node(position=[2,2.25,0], label="a_1", node_color=node_orange) 
+
+        a2_top = make_node(position=[2,0.75,0], label="a_2", node_color=node_green) 
+
+        a1_bot = make_node(position=[2,-0.75,0], label="a_1", node_color=node_orange) 
+
+        a1_bot_bot = make_node(position=[2,-2.25,0], label="a_1", node_color=node_orange) 
+         
 
     # Arrows
-        arrow_1 = make_curved_arrow_top(start_node = d, end_node = d, color=text_black, label= "0,1", radius = 0.21)
+        arrow_1 = make_arrow(start = d, end = a1_top, label = "i1", scale_label = 0.4)
+        
+        arrow_2 = make_arrow(start = d, end = a2_top, label = "i2", scale_label = 0.4).shift(UP * 0.03)
+
+        arrow_3 = make_arrow(start = d, end = a1_bot, label = "i3", scale_label = 0.4).shift(DOWN * 0.03)
+        
+        arrow_4 = make_arrow(start = d, end = a1_bot_bot ,label = "i4", scale_label = 0.4)
 
     # Triangle 
         triangle = Triangle(color = text_black, fill_opacity=1).rotate(270*DEGREES)
-        triangle.scale(0.3).shift(LEFT * 0.68 + DOWN * 0.25)
-
-        #triangle_tip = Triangle(color = background_color, fill_opacity=1).rotate(270*DEGREES)
-        #triangle_tip.scale(0.06).shift(LEFT * 0.6 + DOWN * 0.25)
+        triangle.scale(0.3).shift(LEFT * 2.77 + DOWN * 0.25)
    
-        all_nodes = VGroup(d)
+        all_nodes = VGroup(a1_bot_bot, a1_bot, a2_top, a1_top, d)
        
-        all_arrows = VGroup(arrow_1)
+        all_arrows = VGroup(arrow_1, arrow_2, arrow_3, arrow_4)
 
-        #all_objects = VGroup(all_arrows, all_nodes, triangle, triangle_tip).center()
         all_objects = VGroup(all_arrows, all_nodes, triangle).center()
-
         self.add(all_objects)
         
         #debug distance of objects with a grid
         #self.add(NumberPlane())
-    
-
 
         
 with tempconfig({"preview": False}):

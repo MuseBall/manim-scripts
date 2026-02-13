@@ -1,19 +1,19 @@
 """
-TIME : 14:35 - 16:10
+TIME : 19:30 - 15:15
 
 Robust Finite Policies are Nontrivially Structured
 post link: https://www.lesswrong.com/posts/ieX8nK2b2i4JDRH5s/robust-finite-policies-are-nontrivially-structured
 
-Images for Section in Definitions
-Fig Caption: A DFC for a policy which sends inputs that end in 0 to action a1 and sends inputs ending in 1 to action a2
+Images for Section in Proof
+Fig Caption: A DFC with 2 absorbing states
 
 Generate image by simple running script:
-python ./dfc_a1a2.py
+python ./dfc_absorbing.py
 """
 
 from manim import *
 import numpy as np
-from nodes_and_arrows import make_node, make_arrow, make_curved_arrow_right_to_left, make_curved_arrow_top, make_curved_arrow_left_to_right
+from nodes_and_arrows import make_node, make_arrow, make_curved_arrow_right_to_left, make_curved_arrow_top, make_curved_arrow_left_to_right, make_curved_arrow_right, make_curved_arrow_bot
 
 
 config.pixel_height = 1080
@@ -32,6 +32,7 @@ class Graph(Scene):
         node_blue = "#9acecc"
         node_orange = "#d49870"
         node_red = "#d67f86"
+        node_pink ="#c78d9c"
 
 
         # background rectangle with rounded corners
@@ -39,29 +40,32 @@ class Graph(Scene):
                                                 height = 8, width = 8)
 
     # Nodes 
-        a1 = make_node(position=[-2,0,0], radius=0.4, label="a_1", node_color=node_orange) 
+        c = make_node(position=[-5, 0, 0], label="c", node_color = node_blue)
 
-        a2 = make_node(position=[2,0,0], radius=0.4, label="a_2", node_color=node_green) 
+        a = make_node(position=[-2,0,0], label="a", node_color = node_orange) 
+
+        b = make_node(position=[1,0,0], label="b", node_color = node_pink)
 
     # Arrows
-        arrow_1 = make_curved_arrow_left_to_right(start_node = a1, end_node = a2, color=text_black, label= "1", radius = 6).shift(DOWN * 0.05 + LEFT * 0.04)
-        
-        arrow_2 = make_curved_arrow_right_to_left(start_node = a2, end_node = a1, color=text_black, label= "0", radius = 6).shift(UP * 0.05 + RIGHT * 0.04)
 
-        arrow_3 = make_curved_arrow_top(start_node = a1, end_node = a1, color=text_black, label= "0", radius = 0.21)
+        arrow_1 = make_arrow(start = c, end = a, label = "0,1", scale_label = 0.4, label_shift = 0.3)
 
-        arrow_4 = make_curved_arrow_top(start_node = a2, end_node = a2, color=text_black, label= "1", radius = 0.21)
+        arrow_2 = make_arrow(start = a, end = b, label = "1", scale_label = 0.4, label_shift = 0.3)
+
+        arrow_3 = make_curved_arrow_top(start_node = a, end_node = a, color = text_black, label = "0", radius = 0.21, label_scale = 0.4).shift(0.03 * RIGHT)
+
+        arrow_4 = make_curved_arrow_top(start_node = b, end_node = b, color = text_black, label = "0,1", radius = 0.21, label_scale = 0.4).shift(0.03 * RIGHT)
 
     # Triangle 
         triangle = Triangle(color = text_black, fill_opacity=1).rotate(270*DEGREES)
-        triangle.scale(0.3).shift(LEFT * 2.67 + DOWN * 0.25)
+        triangle.scale(0.3).shift(LEFT * 5.77 + DOWN * 0.25)
    
-        all_nodes = VGroup(a1, a2)
+        all_nodes = VGroup(c, b, a)
        
-        all_arrows = VGroup(arrow_1, arrow_2, arrow_3, arrow_4)
+        all_arrows = VGroup(arrow_1, arrow_2, arrow_3, arrow_4)       
+        #all_arrows = VGroup(arrow_1, arrow_2, arrow_3, arrow_4, arrow_5, arrow_6, arrow_7, arrow_8)
 
         all_objects = VGroup(all_arrows, all_nodes, triangle).center()
-
         self.add(all_objects)
         
         #debug distance of objects with a grid
