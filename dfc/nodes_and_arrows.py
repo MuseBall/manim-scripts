@@ -40,8 +40,8 @@ def make_curved_arrow_top(start_node, end_node, color, label, radius, label_scal
     """
     node is a vgroup object returned by make_node()
     """
-    start = start_node.get_top() + RIGHT * 0.2 + DOWN * 0.04
-    end = end_node.get_top() + LEFT * 0.2 + DOWN * 0.02
+    start = start_node.get_top() + RIGHT * 0.27 + DOWN * 0.02
+    end = end_node.get_top() + LEFT * 0.27 + DOWN * 0.02
     carrow = CurvedArrow(start_point = start , end_point = end, radius=radius, color = color, tip_shape = StealthTip, stroke_width = 3, tip_length = 0.07)
     label_arrow = MathTex(label, color = color, stroke_color = color, stroke_width = 1.3, font_size = 80).move_to(carrow.point_from_proportion(0.5)).shift(UP * 0.2)
 
@@ -55,8 +55,8 @@ def make_curved_arrow_right(start_node, end_node, color, label, radius, label_sc
         """
         node is a vgroup object returned by make_node()
         """
-        start = start_node.get_right() + DOWN * 0.15 
-        end = end_node.get_right() + UP * 0.15
+        start = start_node.get_right() + DOWN * 0.25
+        end = end_node.get_right() + UP * 0.25
         carrow = CurvedArrow(start_point = start , end_point = end, radius=radius, color = color, tip_shape = StealthTip, stroke_width = 3, tip_length = 0.07)
         label_arrow = MathTex(label, color = color, stroke_color = color, stroke_width = 1.3, font_size = 80).move_to(carrow.point_from_proportion(0.5)).shift( RIGHT * 0.3)
 

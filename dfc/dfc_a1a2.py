@@ -48,9 +48,9 @@ class Graph(Scene):
         
         arrow_2 = make_curved_arrow_right_to_left(start_node = a2, end_node = a1, color=text_black, label= "0", radius = 6).shift(UP * 0.05 + RIGHT * 0.04)
 
-        arrow_3 = make_curved_arrow_top(start_node = a1, end_node = a1, color=text_black, label= "0", radius = 0.21)
+        arrow_3 = make_curved_arrow_top(start_node = a1, end_node = a1, color=text_black, label= "0", radius = 0.27).shift(DOWN * 0.06)
 
-        arrow_4 = make_curved_arrow_top(start_node = a2, end_node = a2, color=text_black, label= "1", radius = 0.21)
+        arrow_4 = make_curved_arrow_top(start_node = a2, end_node = a2, color=text_black, label= "1", radius = 0.27).shift(DOWN * 0.06)
 
     # Triangle 
         triangle = Triangle(color = text_black, fill_opacity=1).rotate(270*DEGREES)

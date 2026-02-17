@@ -51,13 +51,13 @@ class Graph(Scene):
          
 
     # Arrows
-        arrow_1 = make_arrow(start = d, end = a1_top, label = "i1", scale_label = 0.4)
+        arrow_1 = make_arrow(start = d, end = a1_top, label = "i_1", scale_label = 0.4, label_shift = 0.3)
         
-        arrow_2 = make_arrow(start = d, end = a2_top, label = "i2", scale_label = 0.4).shift(UP * 0.03)
+        arrow_2 = make_arrow(start = d, end = a2_top, label = "i_2", scale_label = 0.4, label_shift = 0.25).shift(UP * 0.04)
 
-        arrow_3 = make_arrow(start = d, end = a1_bot, label = "i3", scale_label = 0.4).shift(DOWN * 0.03)
+        arrow_3 = make_arrow(start = d, end = a1_bot, label = "i_3", scale_label = 0.4, label_shift = 0.25).shift(DOWN * 0.03)
         
-        arrow_4 = make_arrow(start = d, end = a1_bot_bot ,label = "i4", scale_label = 0.4)
+        arrow_4 = make_arrow(start = d, end = a1_bot_bot ,label = "i_4", scale_label = 0.4, label_shift = 0.3)
 
     # Triangle 
         triangle = Triangle(color = text_black, fill_opacity=1).rotate(270*DEGREES)
