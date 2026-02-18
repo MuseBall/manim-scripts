@@ -5,10 +5,10 @@ Robust Finite Policies are Nontrivially Structured
 post link: https://www.lesswrong.com/posts/ieX8nK2b2i4JDRH5s/robust-finite-policies-are-nontrivially-structured
 
 Images for Section in Atomic Classifier
-Fig Caption: A DFC where every input has a unique input alphabet character
+Fig Caption: A minimized atomic classifier for strings of length 2
 
 Generate image by simple running script:
-python ./atomic_class_l1.py
+python ./atomic_class_l2_2.py
 """
 
 from manim import *
@@ -67,7 +67,7 @@ class Graph(Scene):
 
         arrow_7 = make_arrow(start = a1_bot, end = d_right, label = "0,1", scale_label = 0.4)
         
-        arrow_8 = make_curved_arrow_right(start_node = d_right, end_node = d_right, color=text_black, label= "0,1", radius = 0.15, label_scale = 0.4)
+        arrow_8 = make_curved_arrow_right(start_node = d_right, end_node = d_right, color=text_black, label= "0,1", radius = 0.25, label_scale = 0.4).shift(LEFT * 0.03)
 
     # Triangle 
         triangle = Triangle(color = text_black, fill_opacity=1).rotate(270*DEGREES)
