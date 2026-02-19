@@ -13,7 +13,7 @@ python ./dfc_absorbing.py
 
 from manim import *
 import numpy as np
-from nodes_and_arrows import make_node, make_arrow, make_curved_arrow_right_to_left, make_curved_arrow_top, make_curved_arrow_left_to_right, make_curved_arrow_right, make_curved_arrow_bot
+from nodes_and_arrows import make_node, make_arrow, make_curved_arrow_right_to_left, make_self_loop_top, make_curved_arrow_left_to_right, make_curved_arrow_right, make_curved_arrow_bot
 
 
 config.pixel_height = 1080
@@ -52,9 +52,13 @@ class Graph(Scene):
 
         arrow_2 = make_arrow(start = a, end = b, label = "1", scale_label = 0.4, label_shift = 0.3)
 
-        arrow_3 = make_curved_arrow_top(start_node = a, end_node = a, color = text_black, label = "0", radius = 0.21, label_scale = 0.4).shift(0.03 * RIGHT)
+        #arrow_3 = make_curved_arrow_top(start_node = a, end_node = a, color = text_black, label = "0", radius = 0.21, label_scale = 0.4).shift(0.03 * RIGHT)
 
-        arrow_4 = make_curved_arrow_top(start_node = b, end_node = b, color = text_black, label = "0,1", radius = 0.21, label_scale = 0.4).shift(0.03 * RIGHT)
+        arrow_3 = make_self_loop_top(radius = 0.3, start_angle = 11*PI/6, angle = 5*PI/4, stroke_width = 3, start_node = a, color = text_black, label = "0", label_scale = 0.4, label_shift = UP * 0.05).shift(0.03 * RIGHT + UP * 0.13)
+
+        #arrow_4 = make_curved_arrow_top(start_node = b, end_node = b, color = text_black, label = "0,1", radius = 0.21, label_scale = 0.4).shift(0.03 * RIGHT)
+
+        arrow_4 = make_self_loop_top(radius = 0.3, start_angle = 11*PI/6, angle = 5*PI/4, stroke_width = 3, start_node = b, color = text_black, label = "0,1", label_scale = 0.4, label_shift = 0.05 * UP).shift(0.03 * RIGHT + UP * 0.13)
 
     # Triangle 
         triangle = Triangle(color = text_black, fill_opacity=1).rotate(270*DEGREES)

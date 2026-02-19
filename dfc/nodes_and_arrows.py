@@ -111,7 +111,7 @@ def make_curved_arrow_bot(start_node, end_node, color, label, radius, label_scal
 
     return carrow_with_label
     
-def make_self_loop_top(start_node, label, color, radius = 1.4, start_angle = PI/6, angle = 3*PI/2, stroke_width = 3):
+def make_self_loop_top(start_node, label, color, label_shift = UP * 0, radius = 1.4, start_angle = PI/6, angle = 3*PI/2, stroke_width = 3, label_scale = 0.3):
 
 
     start = start_node.get_top()
@@ -131,7 +131,39 @@ def make_self_loop_top(start_node, label, color, radius = 1.4, start_angle = PI/
 
     label_loop = MathTex(label, color = color, stroke_color = color, stroke_width = 1.3, font_size = 80).move_to(loop.point_from_proportion(0.5)).shift(UP * 0.17 + LEFT * 0.05)
 
-    label_loop.scale(0.3)
+    label_loop.scale(label_scale)
+
+    label_loop.shift(label_shift)
+
+    loop_with_label = VGroup(loop, label_loop)
+
+    return loop_with_label
+
+def make_self_loop_right(start_node, label, color, label_shift = RIGHT * 0.03, radius = 1.4, start_angle = PI/6, angle = 3*PI/2, stroke_width = 3, label_scale = 0.3):
+
+
+    start = start_node.get_right()
+    loop = Arc(
+            radius=radius,
+            start_angle= start_angle,   # controls where it begins
+            angle= angle,       # 270 degrees
+            stroke_width= stroke_width,
+            color = color
+        )
+
+    # Move loop above the node
+    loop.move_to(start)
+
+    # Add arrow tip (optional)
+    loop.add_tip(tip_shape = StealthTip, tip_length = 0.07)
+
+    label_loop = MathTex(label, color = color, stroke_color = color, stroke_width = 1.3, font_size = 80).move_to(loop.point_from_proportion(0.5)).shift(UP * 0.17 + LEFT * 0.05)
+
+    label_loop.scale(label_scale)
+    label_loop.rotate(PI/2)
+
+    label_loop.shift(label_shift)
+    
 
     loop_with_label = VGroup(loop, label_loop)
 

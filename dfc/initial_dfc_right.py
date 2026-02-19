@@ -13,7 +13,7 @@ python ./initial_dfc_right.py
 
 from manim import *
 import numpy as np
-from nodes_and_arrows import make_node, make_arrow, make_curved_arrow_right_to_left, make_curved_arrow_top, make_curved_arrow_left_to_right, make_curved_arrow_right, make_curved_arrow_bot
+from nodes_and_arrows import make_node, make_arrow, make_curved_arrow_right_to_left, make_self_loop_top, make_curved_arrow_left_to_right, make_curved_arrow_right, make_curved_arrow_bot
 
 
 config.pixel_height = 1080
@@ -62,7 +62,7 @@ class Graph(Scene):
 
         # ARROW 1
 
-        arrow_1 = CurvedArrow(start_point = a_left.get_top(), end_point = a_top.get_top() + 0.22 * LEFT, radius= -2, color = text_black, tip_shape = StealthTip, stroke_width = 3, tip_length = 0.07)
+        arrow_1 = CurvedArrow(start_point = a_left.get_top(), end_point = a_top.get_top() + 0.35 * LEFT + DOWN * 0.06, radius= -2, color = text_black, tip_shape = StealthTip, stroke_width = 3, tip_length = 0.07)
 
         label_arrow_1 = MathTex("0", color = text_black, stroke_color = text_black, stroke_width = 1.3, font_size = 80).move_to(arrow_1.point_from_proportion(0.5)).shift(UP * 0.3)
 
@@ -148,7 +148,9 @@ class Graph(Scene):
 
         # ARROW 10
 
-        arrow_10 = make_curved_arrow_top(start_node = a_top, end_node = a_top, color = text_black, label = "0", radius = 0.22, label_scale = 0.4).shift(0.03 * RIGHT)
+        #arrow_10 = make_curved_arrow_top(start_node = a_top, end_node = a_top, color = text_black, label = "0", radius = 0.22, label_scale = 0.4).shift(0.03 * RIGHT)
+
+        arrow_10 = make_self_loop_top(radius = 0.3, start_angle = 11*PI/6 , angle = 5*PI/4, stroke_width = 3, start_node = a_top, color = text_black, label = "0,1", label_scale = 0.4, label_shift = 0.05).shift(0.03 * RIGHT + UP * 0.13)
 
     # Triangle 
         triangle = Triangle(color = text_black, fill_opacity=1).rotate(270*DEGREES)

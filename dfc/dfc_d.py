@@ -13,7 +13,7 @@ python ./dfc_d.py
 
 from manim import *
 import numpy as np
-from nodes_and_arrows import make_node, make_arrow, make_curved_arrow_right_to_left, make_curved_arrow_top, make_curved_arrow_left_to_right
+from nodes_and_arrows import make_node, make_arrow, make_curved_arrow_right_to_left, make_self_loop_top, make_curved_arrow_left_to_right
 
 
 config.pixel_height = 1080
@@ -43,7 +43,9 @@ class Graph(Scene):
         d = make_node(position=[0,0,0], radius=0.4, label="d") 
 
     # Arrows
-        arrow_1 = make_curved_arrow_top(start_node = d, end_node = d, color=text_black, label= "0,1", radius = 0.21)
+        #arrow_1 = make_curved_arrow_top(start_node = d, end_node = d, color=text_black, label= "0,1", radius = 0.21)
+
+        arrow_1 = make_self_loop_top(radius = 0.3, start_angle = 11*PI/6, angle = 5*PI/4, stroke_width = 3, start_node = d, color = text_black, label = "0,1"). shift(UP * 0.08)
 
     # Triangle 
         triangle = Triangle(color = text_black, fill_opacity=1).rotate(270*DEGREES)

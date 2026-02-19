@@ -13,7 +13,7 @@ python ./atomic_class_l2_2.py
 
 from manim import *
 import numpy as np
-from nodes_and_arrows import make_node, make_arrow, make_curved_arrow_right_to_left, make_curved_arrow_top, make_curved_arrow_left_to_right, make_curved_arrow_right
+from nodes_and_arrows import make_node, make_arrow, make_curved_arrow_right_to_left, make_self_loop_top, make_curved_arrow_left_to_right, make_self_loop_right
 
 
 config.pixel_height = 1080
@@ -67,7 +67,9 @@ class Graph(Scene):
 
         arrow_7 = make_arrow(start = a1_bot, end = d_right, label = "0,1", scale_label = 0.4)
         
-        arrow_8 = make_curved_arrow_right(start_node = d_right, end_node = d_right, color=text_black, label= "0,1", radius = 0.25, label_scale = 0.4).shift(LEFT * 0.03)
+        #arrow_8 = make_curved_arrow_right(start_node = d_right, end_node = d_right, color=text_black, label= "0,1", radius = 0.25, label_scale = 0.4).shift(LEFT * 0.03)
+
+        arrow_8 = make_self_loop_right(radius = 0.3, start_angle = 11*PI/6, angle = 5*PI/4, stroke_width = 3, start_node = d_right, color = text_black, label = "0,1", label_scale = 0.4, label_shift = UP * 0.15).shift(0.09 * RIGHT + UP * 0.09).rotate(-PI/2).shift(RIGHT * 0.3 + DOWN * 0.3)
 
     # Triangle 
         triangle = Triangle(color = text_black, fill_opacity=1).rotate(270*DEGREES)
