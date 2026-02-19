@@ -120,7 +120,7 @@ class Graph(Scene):
 
         graph = VGroup(all_nodes, all_arrows).shift(DOWN * 1.5)
 
-        all_objects = VGroup(all_arrows, all_nodes, label)
+        all_objects = VGroup(all_arrows, all_nodes, label).center()
         self.add(all_objects)
         
         #debug distance of objects with a grid
