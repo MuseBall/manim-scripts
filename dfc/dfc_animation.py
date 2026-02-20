@@ -74,7 +74,7 @@ class Graph(Scene):
     def construct(self):
 
         # hex code of colours
-        self.camera.background_color = "#dce2e1" 
+        self.camera.background_color = "#ffffff" 
         text_black = "#22323b"
         #text_black_fade = "#5a869f"
         text_black_fade = "#86a8bf"
