@@ -41,15 +41,15 @@ class Graph(Scene):
                                                 height = 8, width = 8)
 
     # Nodes 
-        acceptable_1 = make_node(position=[-4, 2, 0], label="1", node_color = node_blue)
+        acceptable_1 = make_node(position=[-4, 2, 0], label="", node_color = node_blue)
 
-        acceptable_2 = make_node(position=[-3,0,0], label="2", node_color = node_blue) 
+        acceptable_2 = make_node(position=[-3,0,0], label="", node_color = node_blue) 
 
-        acceptable_3 = make_node(position=[-5,0,0], label="3", node_color = node_blue)
+        acceptable_3 = make_node(position=[-5,0,0], label="", node_color = node_blue)
 
-        unacceptable_1 = make_node(position=[0, 1.75, 0], label="4", node_color = node_green)
+        unacceptable_1 = make_node(position=[0, 1.75, 0], label="", node_color = node_green)
 
-        unacceptable_2 = make_node(position=[0,-0.25,0], label="5", node_color = node_green) 
+        unacceptable_2 = make_node(position=[0,-0.25,0], label="", node_color = node_green) 
 
     #Ellipse
 
