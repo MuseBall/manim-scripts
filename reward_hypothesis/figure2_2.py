@@ -1,14 +1,13 @@
 """
 TIME : 11:45 - 13:25
 
-Guille - Reward Hypothesis - Dovetail Project∗
-post link: https://www.lesswrong.com/posts/ieX8nK2b2i4JDRH5s/robust-finite-policies-are-nontrivially-structured
+Guille - Reward Hypothesis - Dovetail Project
 
-Images for Section in Introduction
-Fig Caption: A DFC with 2 absorbing states
+Images for Section in Preferences
+Figure 2: Acceptable subset vs Relation preference.
 
 Generate image by simple running script:
-python ./figure2_1.py
+python ./figure2_2.py
 """
 
 from manim import *
