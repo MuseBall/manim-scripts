@@ -60,11 +60,11 @@ class Graph(Scene):
 
         arrow_1 = make_self_loop_top(radius = 0.3, start_angle = 11*PI/6, angle = 5*PI/4, stroke_width = 3, start_node = acceptable_1, color = text_black, label = "1"). shift(UP * 0.08)
 
-        arrow_2 = make_arrow(start = acceptable_3, end = acceptable_2, label = "", scale_label = 0.4, label_shift = 0.3).shift(UP * 0.15)
+        arrow_2 = make_arrow(start = acceptable_3, end = acceptable_2, label = "", scale_label = 0.4, label_shift = 0.3).shift(UP * 0.15 * RIGHT * 0.03)
 
-        arrow_3 = make_arrow(start = acceptable_2, end = acceptable_3, label = "", scale_label = 0.4, label_shift = 0.3).shift(DOWN * 0.15)
+        arrow_3 = make_arrow(start = acceptable_2, end = acceptable_3, label = "", scale_label = 0.4, label_shift = 0.3).shift(DOWN * 0.15 + RIGHT * 0.07)
 
-        arrow_4 = make_arrow(start = acceptable_2, end = acceptable_1, label = "", scale_label = 0.4, label_shift = 0.3)
+        arrow_4 = make_arrow(start = acceptable_2, end = acceptable_1, label = "", scale_label = 0.4, label_shift = 0.3).shift(DOWN * 0.1)
 
         arrow_5 = make_arrow(start = acceptable_2, end = unacceptable_1, label = "", scale_label = 0.4, label_shift = 0.3)
 
@@ -72,7 +72,7 @@ class Graph(Scene):
 
         arrow_7 = make_arrow(start = acceptable_1, end = unacceptable_1, label = "", scale_label = 0.4, label_shift = 0.3)
 
-        arrow_8 = make_arrow(start = unacceptable_1, end = unacceptable_2, label = "", scale_label = 0.4, label_shift = 0.3)
+        arrow_8 = make_arrow(start = unacceptable_1, end = unacceptable_2, label = "", scale_label = 0.4, label_shift = 0.3).shift(UP * 0.04)
 
         all_nodes = VGroup(acceptable_1, acceptable_2, acceptable_3, unacceptable_1, unacceptable_2)
      
@@ -80,7 +80,7 @@ class Graph(Scene):
 
         graph = VGroup(all_nodes, all_arrows).shift(DOWN * 1.5)
 
-        all_objects = VGroup(all_nodes, label, all_arrows).center()
+        all_objects = VGroup(all_arrows, all_nodes, label).center()
         self.add(all_objects)
         
         #debug distance of objects with a grid
