@@ -73,41 +73,47 @@ class Graph(Scene):
         line_label = Tex("Incomplete", color = text_black, stroke_color = "#a36066" , 
         stroke_width = 1.3, font_size = 25).next_to(line_13, LEFT).shift(RIGHT * 0.3)
 
-    # Left Nodes
+    # Right Nodes
 
-        node_1_left = node_1.copy().move_to([4, 2, 0])
-        node_2_left = node_2.copy().move_to([3, 0, 0])
-        node_3_left = node_3.copy().move_to([5, 0, 0])
+        node_1_right = node_1.copy().move_to([4, 2, 0])
+        node_2_right = node_2.copy().move_to([3, 0, 0])
+        node_3_right = node_3.copy().move_to([5, 0, 0])
 
-    # Left Arrows
+    # Right Arrows
 
-        arrow_1_left = make_self_loop_top(radius = 0.3, start_angle = 11*PI/6, angle = 5*PI/4, stroke_width = 3, start_node = node_1_left, color = text_black, label = "").shift(UP * 0.11)
+        arrow_1_right = make_self_loop_top(radius = 0.3, start_angle = 11*PI/6, angle = 5*PI/4, stroke_width = 3, start_node = node_1_right, color = text_black, label = "").shift(UP * 0.11)
 
-        arrow_2_left = make_self_loop_bot(radius = 0.3, start_angle = -11*PI/6, angle = -5*PI/4 , stroke_width = 3, start_node = node_2_left, color = text_black, label = "").shift(DOWN * 0.11)
+        arrow_2_right = make_self_loop_bot(radius = 0.3, start_angle = -11*PI/6, angle = -5*PI/4 , stroke_width = 3, start_node = node_2_right, color = text_black, label = "").shift(DOWN * 0.11)
 
-        arrow_3_left = make_self_loop_bot(radius = 0.3, start_angle = -11*PI/6, angle = -5*PI/4, stroke_width = 3, start_node = node_3_left, color = text_black, label = "").shift(DOWN * 0.11)
+        arrow_3_right = make_self_loop_bot(radius = 0.3, start_angle = -11*PI/6, angle = -5*PI/4, stroke_width = 3, start_node = node_3_right, color = text_black, label = "").shift(DOWN * 0.11)
 
-        arrow_4_left = make_arrow(start = node_3_left, end = node_2_left, label = "", scale_label = 0.4, label_shift = 0.3).shift(UP * 0.15 + RIGHT * 0.06)
+        arrow_4_right = make_arrow(start = node_3_right, end = node_2_right, label = "", scale_label = 0.4, label_shift = 0.3).shift(UP * 0.15 + RIGHT * 0.06)
 
-        arrow_5_left = make_arrow(start = node_2_left, end = node_3_left, label = "", scale_label = 0.4, label_shift = 0.3).shift(DOWN * 0.15 + RIGHT * 0.01)
+        arrow_5_right = make_arrow(start = node_2_right, end = node_3_right, label = "", scale_label = 0.4, label_shift = 0.3).shift(DOWN * 0.15 + RIGHT * 0.01)
 
-        arrow_6_left = make_arrow(start = node_2_left.get_top(), end = node_1_left, label = "", scale_label = 0.4, label_shift = 0.3)
+        arrow_6_right = make_arrow(start = node_2_right.get_top(), end = node_1_right, label = "", scale_label = 0.4, label_shift = 0.3)
 
-        arrow_7_left = make_arrow(start = node_1_left, end = node_3_left.get_top(), label = "", scale_label = 0.4, label_shift = 0.3).shift(UP * 0.03)
+        arrow_7_right = make_arrow(start = node_1_right, end = node_3_right.get_top(), label = "", scale_label = 0.4, label_shift = 0.3).shift(UP * 0.03)
 
-    #Label Left
+    # Right Label
 
-        label_left = Tex("Complete", color = text_black, stroke_color = text_black, stroke_width = 1.3, font_size = 65).move_to([4,-2,0])
+        label_right = Tex("Complete", color = text_black, stroke_color = text_black, stroke_width = 1.3, font_size = 65).move_to([4,-2,0])
 
-        label_left_small = Tex("Indifferent", color = text_black, stroke_color = text_black, stroke_width = 1.3, font_size = 25).move_to([4,-0.5,0])
+        label_right_small = Tex("Indifferent", color = text_black, stroke_color = text_black, stroke_width = 1.3, font_size = 25).move_to([4,-0.5,0])
 
-        label_small = label_left_small.copy().move_to([-4,-0.5,0])
+        label_small = label_right_small.copy().move_to([-4,-0.5,0])
 
-        all_nodes = VGroup(node_1, node_2, node_3, node_1_left, node_2_left, node_3_left)
+    # Adjusting the two graphs to be closer
+
+        graph_right = VGroup(label_right, label_right_small,node_1_right, node_2_right, node_3_right, arrow_1_right, arrow_2_right, arrow_3_right, arrow_4_right, arrow_5_right, arrow_6_right, arrow_7_right).shift(LEFT * 1)
+
+        graph_right = VGroup(label, label_small, node_1, node_2, node_3, arrow_1, arrow_2, arrow_3, arrow_4, arrow_5, arrow_6, line_13, line_label).shift(RIGHT * 1)
+
+        all_nodes = VGroup(node_1, node_2, node_3, node_1_right, node_2_right, node_3_right)
      
-        all_arrows = VGroup(arrow_1, arrow_2, arrow_3, arrow_4, arrow_5, arrow_6, line_13, arrow_1_left, arrow_2_left, arrow_3_left, arrow_4_left, arrow_5_left, arrow_6_left, arrow_7_left)
+        all_arrows = VGroup(arrow_1, arrow_2, arrow_3, arrow_4, arrow_5, arrow_6, line_13, arrow_1_right, arrow_2_right, arrow_3_right, arrow_4_right, arrow_5_right, arrow_6_right, arrow_7_right)
 
-        all_objects = VGroup(all_arrows, all_nodes, label, line_label, label_left, label_left_small, label_small).center()
+        all_objects = VGroup(all_arrows, all_nodes, label, line_label, label_right, label_right_small, label_small).center()
         self.add(all_objects)
         
         #debug distance of objects with a grid
