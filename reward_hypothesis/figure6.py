@@ -265,13 +265,13 @@ class Graph(Scene):
                 [top_left, top_right],
                 [bot_left, bot_right]
             ],
-            row_labels=[Tex("Transitive", color = text_black, font_size = 60), Tex("Not \\\\ Transitive", color = text_black, font_size = 60)],
-            col_labels=[Tex("Complete", color = text_black, font_size = 60), Tex("Not \\\\ Complete", color = text_black, font_size = 60)],
+            row_labels=[Tex("Transitive", color = text_black, font_size = 65), Tex("Not \\\\ Transitive", color = text_black, font_size = 65)],
+            col_labels=[Tex("Complete", color = text_black, font_size = 65), Tex("Not \\\\ Complete", color = text_black, font_size = 65)],
             element_to_mobject=lambda m: m
 
         )
 
-        table.scale(0.65).center()
+        table.scale(0.62).center()
         table.get_horizontal_lines().set_color(text_black)
         table.get_vertical_lines().set_color(text_black)
 
