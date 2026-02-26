@@ -68,9 +68,9 @@ class Graph(Scene):
 
     # Dotted line and label
 
-        line_13 = DashedLine(node_1, node_3.get_top(), dash_length=0.15, color= "#a36066", stroke_width=3).shift(LEFT * 0.15)
+        line_13 = DashedLine(node_1, node_3.get_top(), dash_length=0.15, color= "#24867e", stroke_width=3).shift(LEFT * 0.15)
 
-        line_label = Tex("Incomplete", color = text_black, stroke_color = "#a36066" , 
+        line_label = Tex("Incomplete", color = text_black, stroke_color = "#24867e" , 
         stroke_width = 1.3, font_size = 25).next_to(line_13, LEFT).shift(RIGHT * 0.3)
 
     # Right Nodes
