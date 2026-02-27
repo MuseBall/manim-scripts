@@ -4,15 +4,14 @@ TIME : 10:50 - 11:30
 Guille - Reward Hypothesis - Dovetail Project
 
 Images for Section in Set - Order representation - Preorder and Debreu separable - Debreu-Fishburns theorem
-Figure 3: Order representation
+Figure 7: Lexicographic order
 
 Generate image by simple running script:
-python ./figure2_1.py
+python ./figure7.py
 """
 
 from manim import *
 import numpy as np
-from nodes_and_arrows import make_node, make_arrow
 
 
 config.pixel_height = 1080
@@ -45,6 +44,7 @@ class Graph(Scene):
         labels_axes = axes.get_axis_labels(MathTex("w_a", color = text_black, stroke_width = 1.5).scale(0.8), MathTex("w_p", color = text_black, stroke_width = 1.5).scale(0.8))
 
         labels_axes[0].next_to(axes.get_x_axis().get_right(), RIGHT)
+        labels_axes[1].next_to(axes.get_y_axis().get_top(), UP)
 
     # Points in graph
 
