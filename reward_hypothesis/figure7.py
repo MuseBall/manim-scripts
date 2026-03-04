@@ -73,4 +73,4 @@ class Graph(Scene):
         self.add(all_objects)
         
         #debug distance of objects with a grid
-        self.add(NumberPlane())
+        #self.add(NumberPlane())
