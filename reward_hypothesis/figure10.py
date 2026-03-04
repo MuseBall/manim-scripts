@@ -6,10 +6,10 @@ TIME : 19:00 - 19:20
 Guille - Reward Hypothesis - Dovetail Project
 
 Images for Section in Set - Order representation - Preorder and Debreu separable - Debreu-Fishburns theorem
-Figure 9: Lexicographical linearization: asymptotic
+Figure 10: Lexicographical linearization: uncountable filled intervals
 
 Generate image by simple running script:
-python ./figure9.py
+python ./figure10.py
 """
 
 from manim import *
