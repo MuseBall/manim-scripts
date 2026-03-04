@@ -7,7 +7,7 @@ Images for Section in Set - Order representation - Preorder and Debreu separable
 Figure 12: Denseness.
 
 Generate image by simple running script:
-python ./figure7.py
+python ./figure12.py
 """
 
 from manim import *
