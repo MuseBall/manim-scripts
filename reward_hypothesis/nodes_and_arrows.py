@@ -17,13 +17,13 @@ def make_node(position, label="x", radius=0.5, node_color="#e1c180", text_color=
 
 #def make_arrow(self, start, end, label = "x", buff=0.5, color = "#22323b", tip_shape = StealthTip, stroke_width = 7, tip_length = 0.25):
 
-def make_arrow(start, end, label="x", label_shift=0.2, color="#22323b", tip_shape = StealthTip,  scale_label = 0.3, tip_length = 0.07):
+def make_arrow(start, end, label="x", label_shift=0.2, color="#22323b", tip_shape = StealthTip,  scale_label = 0.3, tip_length = 0.07, stroke_width = 2.5):
     """
     start, end can be numpy arrays showing [x,y,z] or any mobject whose position will be taken by Arrow().
     In this case, it can be node objects from make_node()
     """
     
-    arrow = Arrow(start = start, end = end, color = color, tip_shape = tip_shape, stroke_width = 2.5, buff = 0, tip_length = tip_length).shift(LEFT * 0.04)
+    arrow = Arrow(start = start, end = end, color = color, tip_shape = tip_shape, stroke_width = stroke_width, buff = 0, tip_length = tip_length).shift(LEFT * 0.04)
 
     angle = arrow.get_angle()
 
