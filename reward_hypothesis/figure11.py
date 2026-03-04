@@ -54,9 +54,9 @@ class Graph(Scene):
 
     #Label
 
-        label_right_bot = MathTex(f"(X,\succeq )", color = text_black, stroke_color = text_black, stroke_width = 1.3, font_size = 65).move_to([-2.5,-4,0])
+        label_right_bot = MathTex(f"(X,\succsim )", color = text_black, stroke_color = text_black, stroke_width = 1.3, font_size = 65).move_to([-2.5,-4,0])
 
-        label_left_bot = MathTex(f"(X, \succeq_Q)", color = text_black, stroke_color = text_black, stroke_width = 1.3, font_size = 65).move_to([4,-2,0])
+        label_left_bot = MathTex(f"(X \setminus \sim, \succsim_Q)", color = text_black, stroke_color = text_black, stroke_width = 1.3, font_size = 65).move_to([4,-2,0])
 
     # Self loop arrows
 

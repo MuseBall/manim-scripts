@@ -66,7 +66,7 @@ class Graph(Scene):
         line_AB = DashedLine(point_A + UP * 2, point_B + DOWN * 5, dash_length=0.15, color=text_black, stroke_width=3)
         line_C = DashedLine(point_C + UP * 4.3, point_C + DOWN * 1.8, dash_length=0.15, color=text_black, stroke_width=3)
 
-        label = MathTex("x \succeq y \succeq z", font_size = 70, stroke_width = 2).set_color(text_black).next_to(axes, DOWN)
+        label = MathTex("x \succsim y \succsim z", font_size = 70, stroke_width = 2).set_color(text_black).next_to(axes, DOWN)
 
 
         all_objects = VGroup(axes, line_AB, line_C, dot_A, dot_B, dot_C, labels_axes, label_A, label_B, label_C, label).center().scale(0.8)

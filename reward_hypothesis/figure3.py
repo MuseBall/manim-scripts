@@ -51,9 +51,9 @@ class Graph(Scene):
 
     #Label
 
-        label_right = MathTex("\succeq", color = text_black, stroke_color = text_black, stroke_width = 1.3, font_size = 50).move_to([-3,-3,0])
+        label_right = MathTex("\succsim", color = text_black, stroke_color = text_black, stroke_width = 1.3, font_size = 50).move_to([-3,-3,0])
 
-        label_right_bot = MathTex("x \succeq y", color = text_black, stroke_color = text_black, stroke_width = 1.3, font_size = 65).move_to([-3,-4,0])
+        label_right_bot = MathTex("x \succsim y", color = text_black, stroke_color = text_black, stroke_width = 1.3, font_size = 65).move_to([-3,-4,0])
 
         label_left = MathTex("f", color = text_black, stroke_color = text_black, stroke_width = 1.3, font_size = 50).move_to([4.3,-3,0])
 
