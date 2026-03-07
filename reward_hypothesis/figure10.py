@@ -78,8 +78,6 @@ class Graph(Scene):
         line_11_2 = DashedLine(point_1 + UP * 0.85, point_1 + UP * 2.5, dash_length=0.15, color="#739b99", stroke_width=3)
         
         line_12 = DashedLine(point_1 + RIGHT * 0.4 + UP * 2.5, point_1 + RIGHT * 0.4 + DOWN * 2.5, dash_length=0.15, color="#739b99", stroke_width=3)
-        
-
 
         line_13 = DashedLine(point_1 + RIGHT * 0.85 + UP * 2.5, point_1 + RIGHT * 0.85 + DOWN * 2.5, dash_length=0.15, color="#739b99", stroke_width=3)
         line_14 = DashedLine(point_1 + RIGHT * 1.3 + UP * 2.5, point_1 + RIGHT * 1.3 + DOWN * 2.5, dash_length=0.15, color="#739b99", stroke_width=3)
