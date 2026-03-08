@@ -5,7 +5,7 @@ Guille - Reward Hypothesis - Dovetail Project
 
 Images for Section in Mixture space - Expected utility - Indepen-
 dence and Continuity - vNM theorem
-Figure 157: Continuity
+Figure 17: Continuity
 
 Generate image by simple running script:
 python ./figure17.py
