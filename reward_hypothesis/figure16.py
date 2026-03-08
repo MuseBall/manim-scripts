@@ -4,11 +4,12 @@ TIME : 11:20 - 11:55
 
 Guille - Reward Hypothesis - Dovetail Project
 
-Images for Section in Set - Order representation - Preorder and Debreu separable - Debreu-Fishburns theorem
+Images for Section in Mixture space - Expected utility - Indepen-
+dence and Continuity - vNM theorem
 Figure 16: Constrained MDP and no independence
 
 Generate image by simple running script:
-python ./figure15.py
+python ./figure16.py
 """
 
 from manim import *

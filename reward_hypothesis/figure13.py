@@ -3,7 +3,8 @@ TIME : 17:40 - 19:00
 
 Guille - Reward Hypothesis - Dovetail Project
 
-Images for Section in Set - Order representation - Preorder and Debreu separable - Debreu-Fishburns theorem
+Images for Section in Mixture space - Expected utility - Indepen-
+dence and Continuity - vNM theorem
 Figure 13: Mixture space
 
 Generate image by simple running script:

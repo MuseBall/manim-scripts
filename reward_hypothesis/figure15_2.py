@@ -4,7 +4,8 @@ TIME : 23:50 - 00:10
 
 Guille - Reward Hypothesis - Dovetail Project
 
-Images for Section in Set - Order representation - Preorder and Debreu separable - Debreu-Fishburns theorem
+Images for Section in Mixture space - Expected utility - Indepen-
+dence and Continuity - vNM theorem
 Figure 15: Independence
 
 Generate image by simple running script:
