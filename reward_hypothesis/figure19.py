@@ -1,5 +1,5 @@
 """
-TIME : 15:10 - 16 :50
+TIME : 15:10 - 16:50
 
 Guille - Reward Hypothesis - Dovetail Project
 
