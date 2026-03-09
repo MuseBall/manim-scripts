@@ -62,7 +62,7 @@ class Graph(Scene):
 
     #Lines in graph
 
-        line_xy = DashedLine(point_x + RIGHT * 0.75 + UP * 1, point_x + RIGHT * 0.75, dash_length=0.15, color=text_black, stroke_width=3)
+        line_xy = DashedLine(point_x + RIGHT * 0.75 + UP * 1, point_x + RIGHT * 0.75, dash_length=0.15, color="#739b99", stroke_width=3)
 
         label_line = MathTex(r"q \in \mathbb{Q}", font_size = 60).scale(0.6).set_color(text_black).next_to(line_xy, UP)
 
@@ -93,7 +93,7 @@ class Graph(Scene):
 
     #Lines in graph
 
-        line_xy_right = DashedLine(point_x + RIGHT * 0.75 + UP * 1, point_x + RIGHT * 0.75, dash_length=0.15, color=text_black, stroke_width=3)
+        line_xy_right = DashedLine(point_x + RIGHT * 0.75 + UP * 1, point_x + RIGHT * 0.75, dash_length=0.15, color="#739b99", stroke_width=3)
 
         label_line_right = MathTex(r"d \in D", font_size = 60).scale(0.6).set_color(text_black).next_to(line_xy, UP)
 

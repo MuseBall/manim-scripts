@@ -110,9 +110,9 @@ class Graph(Scene):
         arc = ArcBetweenPoints(start = point_00 , end = point_0e0 + UP * 1.5 + LEFT * 0.1, radius= 1.7, color = text_black, stroke_width = 3).shift(UP * 0.05)
 
     # Lines in Sub-graph
-        line_0k = DashedLine(point_0k + UP * 0.22, point_0k, dash_length=0.15, color=text_black, stroke_width=3)
-        line_0e0 = DashedLine(point_0e0 + UP * 1.8, point_0e0, dash_length=0.15, color=text_black, stroke_width=3)
-        line_10 = DashedLine(point_10 + UP * 1.8, point_10, dash_length=0.15, color=text_black, stroke_width=3)
+        line_0k = DashedLine(point_0k + UP * 0.22, point_0k, dash_length=0.15, color="#739b99", stroke_width=3)
+        line_0e0 = DashedLine(point_0e0 + UP * 1.8, point_0e0, dash_length=0.15, color="#739b99", stroke_width=3)
+        line_10 = DashedLine(point_10 + UP * 1.8, point_10, dash_length=0.15, color="#739b99", stroke_width=3)
 
         label_line_10 = MathTex("?", font_size = 50).scale(0.6).set_color(text_black).next_to(line_10, UP)
 
