@@ -45,30 +45,34 @@ plt.imsave("triangle_heatmap.png", rgba, origin='lower')
 
 
 def triangle_heatmap(vertices, function, plotsave=False, filename="triangle_heatmap.png",
-                           canvas_size=(500, 500), xlim=(-3, 3), ylim=(-3, 1), cmap_colors=["#749b99", "#ffffff"]):
-    """
-    vertices: numpy array of triangle vertices [[x0,y0],[x1,y1],[x2,y2]]
-    function: function f(X,Y)
-    plotsave: save PNG
-    filename: file path
-    canvas_size: output pixel size
-    xlim, ylim: fixed canvas limits
-    cmap_colors: colors for LinearSegmentedColormap
-    """
+                    canvas_size=(500, 500), xlim=(0, 6), ylim=(0, 6),
+                    cmap_colors=["#9acecc", "#ffffff"]):
 
     # fixed meshgrid
     x = np.linspace(xlim[0], xlim[1], canvas_size[0])
     y = np.linspace(ylim[0], ylim[1], canvas_size[1])
     X, Y = np.meshgrid(x, y)
 
-    # apply function
+    # function
     Z = function(X, Y)
 
     # normalize
     Z_norm = (Z - Z.min()) / (Z.max() - Z.min() + 1e-12)
 
-    # mask triangle
-    path = Path(vertices)
+    # --- center triangle using bounding box (visual centering) ---
+    xmin, xmax = vertices[:, 0].min(), vertices[:, 0].max()
+    ymin, ymax = vertices[:, 1].min(), vertices[:, 1].max()
+
+    triangle_center = np.array([(xmin + xmax) / 2,
+                            (ymin + ymax) / 2])
+
+    canvas_center = np.array([(xlim[0] + xlim[1]) / 2,
+                          (ylim[0] + ylim[1]) / 2])
+
+    centered_vertices = vertices + (canvas_center - triangle_center)
+
+    # mask
+    path = Path(centered_vertices)
     points = np.vstack((X.flatten(), Y.flatten())).T
     mask = path.contains_points(points).reshape(X.shape)
 
@@ -76,7 +80,7 @@ def triangle_heatmap(vertices, function, plotsave=False, filename="triangle_heat
     cmap = LinearSegmentedColormap.from_list("custom", cmap_colors)
     rgba = cmap(Z_norm)
 
-    # apply mask
+    # alpha mask
     rgba[..., -1] = mask.astype(float)
 
     # save
