@@ -57,8 +57,8 @@ def triangle_heatmap(vertices, function, plotsave=False, filename = "triangle_he
     A = vertices[0]
     B = vertices[1]
     C = vertices[2]
-    xmin, xmax = np.min(A[0], B[0], C[0]), np.max(A[0], B[0], C[0])
-    ymin, ymax = np.min(A[1], B[1], C[1]), np.max(A[1], B[1], C[1])
+    xmin, xmax = np.min(vertices[:, 0]), np.max(vertices[:, 0])
+    ymin, ymax = np.min(vertices[:, 1]), np.max(vertices[:, 1])
 
     x = np.linspace(xmin, xmax, 400)
     y = np.linspace(ymin, ymax, 400)
