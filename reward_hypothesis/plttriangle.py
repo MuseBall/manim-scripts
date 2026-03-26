@@ -43,46 +43,43 @@ rgba[..., -1] = mask.astype(float)
 # Save as PNG (origin lower to match Manim)
 plt.imsave("triangle_heatmap.png", rgba, origin='lower')
 
-def triangle_heatmap(vertices, function, plotsave=False, filename = "triangle_heatmap.png"):
+
+def triangle_heatmap(vertices, function, plotsave=False, filename="triangle_heatmap.png",
+                           canvas_size=(500, 500), xlim=(-3, 3), ylim=(-3, 1), cmap_colors=["#749b99", "#ffffff"]):
     """
-    vertices: numpy array of triangle vertices in a list 
-        eg:
-        np.array([[0, 0], [-3, -3], [3, -3]])
-    function: python function that takes two arguments
-        eg: 
-        np.sin(X) + np.cos(Y)
+    vertices: numpy array of triangle vertices [[x0,y0],[x1,y1],[x2,y2]]
+    function: function f(X,Y)
+    plotsave: save PNG
+    filename: file path
+    canvas_size: output pixel size
+    xlim, ylim: fixed canvas limits
+    cmap_colors: colors for LinearSegmentedColormap
     """
 
-    # meshgrid
-    A = vertices[0]
-    B = vertices[1]
-    C = vertices[2]
-    xmin, xmax = np.min(vertices[:, 0]), np.max(vertices[:, 0])
-    ymin, ymax = np.min(vertices[:, 1]), np.max(vertices[:, 1])
-
-    x = np.linspace(xmin, xmax, 400)
-    y = np.linspace(ymin, ymax, 400)
+    # fixed meshgrid
+    x = np.linspace(xlim[0], xlim[1], canvas_size[0])
+    y = np.linspace(ylim[0], ylim[1], canvas_size[1])
     X, Y = np.meshgrid(x, y)
 
     # apply function
     Z = function(X, Y)
 
     # normalize
-    Z_norm = (Z - Z.min()) / (Z.max() - Z.min())
+    Z_norm = (Z - Z.min()) / (Z.max() - Z.min() + 1e-12)
 
-    # mask from vertices
+    # mask triangle
     path = Path(vertices)
     points = np.vstack((X.flatten(), Y.flatten())).T
     mask = path.contains_points(points).reshape(X.shape)
 
-    # linear cmap
-    cmap = LinearSegmentedColormap.from_list("blue_white",["#749b99", "#ffffff"])
+    # colormap
+    cmap = LinearSegmentedColormap.from_list("custom", cmap_colors)
     rgba = cmap(Z_norm)
 
-    # apply alpha mask
+    # apply mask
     rgba[..., -1] = mask.astype(float)
 
-    # plot as png
+    # save
     if plotsave:
         plt.imsave(filename, rgba, origin='lower')
 
