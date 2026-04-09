@@ -31,7 +31,7 @@ Z_norm = (Z - Z.min()) / (Z.max() - Z.min())
 # Create custom blue-to-white colormap
 
 cmap = LinearSegmentedColormap.from_list(
-    "blue_white", ["#749b99", "#ffffff"]  # deep blue -> white
+    "blue_white", ["#041094", "#ffffff"]  # deep blue -> white
 )
 
 #  Apply colormap
@@ -49,7 +49,10 @@ node_orange = "#d49870"
 node_red = "#d67f86"
 node_pink = "#c78d9c"
 node_purple = "#b6b3c4"
-gradient_blue = "#041094"
+#gradient_blue = "#769c9a"
+gradient_blue = "#71bbb8"
+gradient_white = "#fff1e8"
+
 
 
 # Save as PNG (origin lower to match Manim)
@@ -70,7 +73,7 @@ def triangle_heatmap(
     canvas_size=(500, 500),
     xlim=(0, 6),
     ylim=(0, 6),
-    cmap_colors=["#9acecc", "#ffffff"],
+    cmap_colors=["#041094", "#ffffff"],
 ):
 
     # fixed meshgrid
@@ -148,7 +151,7 @@ def function1D_graph(function):
     dot_y_1 = Dot(point_y_1, color=node_purple, stroke_color=text_black, stroke_width=1)
 
     curve = axes_1.plot(
-        lambda s: function(s - x) + delta, x_range=[x, y], color=text_black
+        lambda s: function(s - x) + delta, x_range=[x, y], color=text_black, stroke_width = 3
     )
 
     line_x_1 = DashedLine(
@@ -266,7 +269,8 @@ def function1D_heatmap(
     # Plot function
     delta = 0.5
     graph = axes.plot(
-        lambda x: function(x) + 2 * delta, x_range=[a, b], color=text_black
+        #lambda x: function(x) + 2 * delta, x_range=[a, b], color=text_black,
+        lambda x: function(x) + 2 * delta, x_range=[a, b], color=text_black, stroke_width = 2
     )
 
     # Sample points along curve
@@ -317,7 +321,7 @@ def function1D_heatmap(
     return subfig
 
 
-def function2D_graph(function, points=False, line=False):
+def function2D_graph(function, function2=None, points=False, line=False):
 
     p1 = np.array([-2, -1])
     p2 = np.array([2, -1])
@@ -335,6 +339,10 @@ def function2D_graph(function, points=False, line=False):
         for y in ys
     ]
     vmin, vmax = min(values), max(values)
+    if function2 is not None:
+        valuesf2
+        vmin2, vax2 
+        totalvmin = min(vim, vim2)
 
     # --- Axes ---
     axes = ThreeDAxes(
@@ -370,6 +378,9 @@ def function2D_graph(function, points=False, line=False):
 
     surface.set_shade_in_3d(False)
 
+    if function2 is not None:
+
+
     # --- Triangle on the floor ---
     triangle_floor = Polygon(
         axes.c2p(*p1 / 1.75, 0),
@@ -396,12 +407,12 @@ def function2D_graph(function, points=False, line=False):
             y = y_vals[j]
             point = np.array([x, y, 0])
 
-            if is_inside_triangle(point, p1, p2, p3):
+            if is_inside_triangle(point, p1, p2, p3): 
                 value = function(x, y)
 
                 cell = Square(
                     side_length=dx + eps,
-                    fill_color=color_map(value, vmin, vmax),
+                    fill_color=color_map(value, totalvmin, vmax),
                     fill_opacity=1,
                     stroke_width=0,
                 ).move_to(point)
