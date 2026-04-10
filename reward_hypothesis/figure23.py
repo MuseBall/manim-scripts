@@ -57,13 +57,10 @@ class Graph(ThreeDScene):
 
         function2D_graph_2.shift(LEFT * 1.6).scale(0.65)
 
-        left_top_graphs = Group(
+        left_top = Group(
             function2D_graph_1,
             function2D_graph_2,
             )
-
-        left_top = self.add(left_top_graphs).set_camera_orientation(phi=60 * DEGREES, theta=-90 * DEGREES)
-
 
         ##### TOP RIGHT GRAPH 22L
 
@@ -77,31 +74,27 @@ class Graph(ThreeDScene):
 
         function2D_graph_4.shift(RIGHT * 4.4).scale(0.65)
 
-        right_top_graphs = Group(
+        right_top = Group(
             function2D_graph_3,
             function2D_graph_4,
             )
-
-        right_top = self.add(right_top_graphs).set_camera_orientation(phi=60 * DEGREES, theta=-90 * DEGREES)
 
         ##### BOTTOM RIGHT GRAPH 21L
 
         # Bottom left graph 1 (Not Dynamically Consistent)
         function2D_graph_5 = function2D_graph(lambda x, y: x / 2 + 2.5, points=True, x_label="", y_label="", z_label = "")
 
-        function2D_graph_5.shift(RIGHT * 1.8).scale(0.65)
+        function2D_graph_5.shift(RIGHT * 1.6).scale(0.65)
 
         # Bottom left graph 2 (Not Dynamically Consistent)
         function2D_graph_6 = function2D_graph(lambda x, y: -x / 3 + 2.5, points=True, x_label="", y_label="", z_label = "")
 
-        function2D_graph_6.shift(RIGHT * 0.9).scale(0.65)
+        function2D_graph_6.shift(RIGHT * 4.4).scale(0.65)
 
-        right_bot_graph = Group(
+        right_bot = Group(
             function2D_graph_5,
             function2D_graph_6,
             )
-
-        right_bot = self.add(right_bot_graph).set_camera_orientation(phi=60 * DEGREES, theta=-90 * DEGREES)
 
         ##### BOTTOM LEFT TEXT
 
@@ -111,25 +104,50 @@ class Graph(ThreeDScene):
 
         text = Group(text1, text2, text3)
 
-    # Table
+        # Table
 
-        table = Table(
-            [[left_top, right_top], [text, right_bot]],
-            row_labels=[
-                Tex("Dynamically \\\\ Consistent", color=text_black, font_size=65),
-                Tex("Not \\\\ Dynamically \\\\ Consistent", color=text_black, font_size=65),
-            ],
-            col_labels=[
-                MathTex(r"\gamma - \textnormal{Indifferent}", color=text_black, font_size=65),
-                MathTex(r"\textnormal{Not} ~ \gamma - \textnormal{Indifferent}", color=text_black, font_size=65),
-            ],
-            element_to_mobject=lambda m: m,
-        )
+        
+        row1 = Tex(
+            "Dynamically \\\\ Consistent", 
+            color=text_black, 
+            font_size=65
+            ).scale(0.7).move_to([-5.6,1,0])
 
-        table.scale(0.69).center()
-        table.get_horizontal_lines().set_color(text_black)
-        table.get_vertical_lines().set_color(text_black)
+        row2 = Tex(
+            "Not \\\\ Dynamically \\\\ Consistent", 
+            color=text_black, 
+            font_size=65
+            ).scale(0.7).move_to([-5.6,-2,0])
 
+        col1 = MathTex(
+            r"\gamma - \textnormal{Indifferent}", 
+            color=text_black, 
+            font_size=65
+            ).scale(0.7).move_to([-1.3,3,0])
+
+        col2 = MathTex(
+            r"\textnormal{Not} ~ \gamma - \textnormal{Indifferent}",
+            color=text_black, 
+            font_size=65
+            ).scale(0.7).move_to([4.3,3,0])
+
+        left_top.move_to([-1.3,1,0]).scale(0.85)
+        right_top.move_to([4.3,1,0]).scale(0.85)
+        text.move_to([-1.3,-2,0]).scale(0.7)
+        right_bot.move_to([3.4,-4,0]).scale(0.65)
+
+        line_row1 = Line([-4, 3.5, 0], [-4, -3.5,0], stroke_width = 3, stroke_color = text_black)
+        line_row1.set_cap_style(CapStyleType.ROUND)
+
+        line_row2 = Line([1.5, 3.5, 0], [1.5, -3.5,0], stroke_width = 3, stroke_color = text_black)
+        line_row2.set_cap_style(CapStyleType.ROUND)
+
+        line_col1 = Line([-7, 2.5, 0], [7, 2.5,0], stroke_width = 3, stroke_color = text_black)
+        line_col1.set_cap_style(CapStyleType.ROUND)
+
+        line_col2 = Line([-7, -0.5, 0], [7, -0.5,0], stroke_width = 3, stroke_color = text_black)
+        line_col2.set_cap_style(CapStyleType.ROUND)
+    
         all_3D = Group(
             function2D_graph_1,
             function2D_graph_2,
@@ -139,10 +157,10 @@ class Graph(ThreeDScene):
             function2D_graph_6,
         )
 
-        #self.add(all_3D)
-        self.add_fixed_in_frame_mobjects(table)
-        #self.add_fixed_in_frame_mobjects(all_2D, labels, NumberPlane())
+        all_2D = Group(text, row1, row2, col1, col2, line_row1, line_row2, line_col1, line_col2)
+
+        self.add(all_3D)
+        #self.add_fixed_in_frame_mobjects(table)
+        self.add_fixed_in_frame_mobjects(all_2D)
         self.set_camera_orientation(phi=60 * DEGREES, theta=-90 * DEGREES)
-        
-        #debug distance of objects with a grid
-        #self.add(NumberPlane())
+    

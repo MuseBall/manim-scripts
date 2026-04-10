@@ -277,8 +277,10 @@ def function1D_graph(
 def function1D_heatmap(
     function,
     points=False,
-    x_label = "x",
-    y_label = "y",
+    x_label="x",
+    y_label="y",
+    a=0,
+    b=4
 ):
 
     # Axes
@@ -298,8 +300,8 @@ def function1D_heatmap(
 
     labels_axes[0].set_opacity(0)
     labels_axes[1].set_opacity(0)
-    a = 0
-    b = 4
+    a = a
+    b = b
 
     point_x = axes.coords_to_point(a, 0)
     point_y = axes.coords_to_point(b, 0)
@@ -418,12 +420,6 @@ def function2D_graph(function, function2=None, points=False, line=False, x_label
         for y in ys
     ]
     vmin, vmax = min(values), max(values)
-    """
-    if function2 is not None:
-        valuesf2
-        vmin2, vax2 
-        totalvmin = min(vim, vim2)
-    """
 
     # --- Axes ---
     axes = ThreeDAxes(
@@ -459,17 +455,14 @@ def function2D_graph(function, function2=None, points=False, line=False, x_label
 
     surface.set_shade_in_3d(False)
 
-    # if function2 is not None:
-
-
     # --- Triangle on the floor ---
     triangle_floor = Polygon(
-            axes.c2p(*p1 / 1.75, 0),
-            axes.c2p(*p2 / 1.75, 0),
-            axes.c2p(*p3 / 1.75, 0),
-            color=text_black,
-            fill_opacity=0,
-        ).set_stroke(text_black, 1)
+        axes.c2p(*p1 / 1.75, 0),
+        axes.c2p(*p2 / 1.75, 0),
+        axes.c2p(*p3 / 1.75, 0),
+        color=text_black,
+        fill_opacity=0,
+    ).set_stroke(text_black, 1)
 
     # --- Sampling grid ---
     resolution = 150
@@ -488,13 +481,12 @@ def function2D_graph(function, function2=None, points=False, line=False, x_label
             y = y_vals[j]
             point = np.array([x, y, 0])
 
-            if is_inside_triangle(point, p1, p2, p3): 
+            if is_inside_triangle(point, p1, p2, p3):
                 value = function(x, y)
 
                 cell = Square(
                     side_length=dx + eps,
-                    #fill_color=color_map(value, totalvmin, vmax),
-                    fill_color=color_map(value, vmax),
+                    fill_color=color_map(value, vmin, vmax),
                     fill_opacity=1,
                     stroke_width=0,
                 ).move_to(point)
@@ -540,25 +532,56 @@ def function2D_graph(function, function2=None, points=False, line=False, x_label
     lines.add(linex, liney, linez)
 
     if points:
+        if x_label == "":
 
-        dot_x = Dot(
-            axes.c2p(p1 / 1.75),
-            color=node_orange,
-            stroke_color=text_black,
-            stroke_width=1,
-        )
-        dot_y = Dot(
-            axes.c2p(p2 / 1.75),
-            color=node_purple,
-            stroke_color=text_black,
-            stroke_width=1,
-        )
-        dot_z = Dot(
-            axes.c2p(p3 / 1.75),
-            color=node_green,
-            stroke_color=text_black,
-            stroke_width=1,
-        )
+            dot_x = Dot(
+                axes.c2p(p1 / 1.75),
+                color=node_orange,
+                stroke_color=text_black,
+                stroke_width=1,
+            ).set_opacity(0)
+
+        else : 
+            dot_x = Dot(
+                axes.c2p(p1 / 1.75),
+                color=node_orange,
+                stroke_color=text_black,
+                stroke_width=1,
+            )
+
+        if y_label == "":
+
+            dot_y = Dot(
+                axes.c2p(p2 / 1.75),
+                color=node_purple,
+                stroke_color=text_black,
+                stroke_width=1,
+            ).set_opacity(0)
+
+        else : 
+            dot_y = Dot(
+                axes.c2p(p2 / 1.75),
+                color=node_purple,
+                stroke_color=text_black,
+                stroke_width=1,
+            )
+
+        if z_label == "":
+
+            dot_z = Dot(
+                axes.c2p(p3 / 1.75),
+                color=node_green,
+                stroke_color=text_black,
+                stroke_width=1,
+            ).set_opacity(0)
+
+        else : 
+            dot_z = Dot(
+                axes.c2p(p3 / 1.75),
+                color=node_green,
+                stroke_color=text_black,
+                stroke_width=1,
+            )
 
         label_x = (
             MathTex(x_label, font_size=60)
@@ -605,6 +628,9 @@ def function2D_graph(function, function2=None, points=False, line=False, x_label
 def function2D_heatmap(
     function,
     points=False,
+    x_label="x", 
+    y_label="y", 
+    z_label = "z",
 ):
 
     side = 4
@@ -621,22 +647,22 @@ def function2D_heatmap(
         dot_z = Dot(p3, color=node_green, stroke_color=text_black, stroke_width=1)
 
         label_x = (
-            MathTex("x", font_size=60)
+            MathTex(x_label, font_size=60)
             .scale(0.6)
             .set_color(text_black)
             .next_to(dot_x, DOWN)
         )
         label_y = (
-            MathTex("y", font_size=60)
+            MathTex(y_label, font_size=60)
             .scale(0.6)
             .set_color(text_black)
             .next_to(dot_y, DOWN)
         )
         label_z = (
-            MathTex("z", font_size=60)
+            MathTex(z_label, font_size=60)
             .scale(0.6)
             .set_color(text_black)
-            .next_to(dot_z, RIGHT)
+            .next_to(dot_z, UP)
         )
 
     # --- Sampling grid ---

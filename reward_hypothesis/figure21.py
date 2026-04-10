@@ -13,6 +13,12 @@ python ./figure21.py
 from manim import *
 import numpy as np
 from nodes_and_arrows import make_arrow
+from plttriangle import (
+    function1D_graph,
+    function1D_heatmap,
+    function2D_graph,
+    function2D_heatmap,
+)
 
 
 config.pixel_height = 1080
@@ -20,7 +26,7 @@ config.pixel_width = 1920
 config.frame_height = config.pixel_height / config.pixel_width * config.frame_width
 
 
-class Graph(Scene):
+class Graph(ThreeDScene):
     def construct(self):
 
         # hex code of colours
@@ -38,231 +44,108 @@ class Graph(Scene):
         # background rectangle with rounded corners
         background_rectangle = RoundedRectangle(color = "#d6e2e2", fill_opacity = 1, corner_radius = 0.7, height = 8, width = 8)
 
-    #Axes 1
+        # Top left graph 1 (Not Dynamically Consistent)
 
-        axes = Axes(x_range =[-1.5,3.5], x_length= 2.5, tips = False, x_axis_config={"include_numbers": False, "include_ticks": False}, axis_config = {"tip_shape": None, "color": text_black})
+        function1D_heatmap_1 = function1D_heatmap(
+            lambda x: -x / 2 + 2,
+            points=False,
+        )
 
-        axes.y_axis.set_opacity(0)
+        function1D_heatmap_1.shift(UP * 1 + LEFT * 6.5)
 
-        labels_axes = axes.get_axis_labels(MathTex(r"(\mathbb{R}, >)", color = text_black, stroke_width = 1.5).scale(0.8))
+        # Top left graph 2 (Not Dynamically Consistent)
 
-        labels_axes[0].set_opacity(0)
-        labels_axes[1].set_opacity(0)
+        function1D_heatmap_2 = function1D_heatmap(
+            lambda x: x / 3 + 0,
+            points=False,
+            a=0,
+            b=4
+        )
 
-    # Points in graph 1
+        function1D_heatmap_2.shift(UP * 1 + LEFT * 3)
 
-        point_x = axes.coords_to_point(-1.5, 0)
-        point_y = axes.coords_to_point(3.5, 0)
+        # Top right graph 1 (Dynamically Consistent)
 
-        dot_x = Dot(point_x, color = node_orange, stroke_color = text_black, stroke_width = 1)
-        dot_y = Dot(point_y, color = node_purple, stroke_color = text_black, stroke_width = 1)
+        function1D_heatmap_3 = function1D_heatmap(
+            lambda x: -x / 2 + 2,
+            points=False,
+        )
 
+        function1D_heatmap_3.shift(UP * 1 + RIGHT * 1.5)
 
-    # Triangle 1
+        # Top right graph 2 (Dynamically Consistent)
 
-        triangle_1 = Polygon(
-            [-1, 0.1, 0],
-            [1, 0.3, 0],
-            [1, 0.1, 0],
-            color = node_blue, fill_opacity = 1).set_stroke(text_black, 2).set_sheen(0.5, LEFT)
+        function1D_heatmap_4 = function1D_heatmap(
+            lambda x: -x / 3 + 1.5 ,
+            points=False,
+        )
 
-        line1 = Line([-1, 0.3,0], [1, 0.5, 0], stroke_color = text_black, stroke_width = 2)
+        function1D_heatmap_4.shift(UP * 1 + RIGHT * 5)
 
-    #Axes 2
+        # Bottom left graph 1 (Not Dynamically Consistent)
+        function2D_graph_1 = function2D_graph(lambda x, y: x / 2 + 2.5, points=True, x_label="", y_label="", z_label = "")
 
-        axes2 = Axes(x_range =[-1.5,3.5], x_length= 2.5, tips = False, x_axis_config={"include_numbers": False, "include_ticks": False}, axis_config = {"tip_shape": None, "color": text_black})
+        function2D_graph_1.move_to(function1D_heatmap_1.get_bottom() + DOWN * 3.5 + RIGHT * 1.8).scale(0.6)
 
-        axes2.y_axis.set_opacity(0)
+        # Bottom left graph 2 (Not Dynamically Consistent)
+        function2D_graph_2 = function2D_graph(lambda x, y: -x / 3 + 2.5, points=True, x_label="", y_label="", z_label = "")
 
-        labels_axes2 = axes2.get_axis_labels(MathTex(r"(\mathbb{R}, >)", color = text_black, stroke_width = 1.5).scale(0.8))
+        function2D_graph_2.move_to(function1D_heatmap_2.get_bottom() + DOWN * 3.6 + RIGHT * 0.9).scale(0.6)
 
-        labels_axes2[0].set_opacity(0)
-        labels_axes2[1].set_opacity(0)
+        # Bottom right graph 1 (Dynamically Consistent)
+        function2D_graph_3 = function2D_graph(lambda x, y: x / 2 + 2.5, points=True, x_label="", y_label="", z_label = "")
 
-    # Points in graph 2
+        function2D_graph_3.move_to(function1D_heatmap_3.get_bottom() + DOWN * 3.5 + LEFT * 0.9).scale(0.6)
 
-        point_x2 = axes2.coords_to_point(-1.5, 0)
-        point_y2 = axes2.coords_to_point(3.5, 0)
+        # Bottom right graph 2 (Dynamically Consistent)
+        function2D_graph_4 = function2D_graph(lambda x, y: x / 2 + 1.5, points=True, x_label="", y_label="", z_label = "")
 
-        dot_x2 = Dot(point_x, color = node_orange, stroke_color = text_black, stroke_width = 1)
-        dot_y2 = Dot(point_y, color = node_purple, stroke_color = text_black, stroke_width = 1)
+        function2D_graph_4.move_to(function1D_heatmap_4.get_bottom() + DOWN * 3.6 + LEFT * 1.8).scale(0.6)
 
+        label_left = (
+            Tex("Not Dynamically Consistent", font_size=70, stroke_width = 1.5)
+            .scale(0.6)
+            .set_color(text_black)
+            .move_to([-3.5, 2.5, 0])
+        )
 
-    # Triangle 2
-
-        triangle_2 = Polygon(
-            [-1, 0.1, 0],
-            [-1, 0.6, 0],
-            [1, 0.1, 0],
-            color = node_blue, fill_opacity = 1).set_stroke(text_black, 2).set_sheen(0.5, RIGHT)
-
-        line2 = Line([1, 0.3,0], [-1, 0.8, 0], stroke_color = text_black, stroke_width = 2)
-
-    #Axes 3
-
-        axes3 = Axes(x_range =[-1.5,3.5], x_length= 2.5, tips = False, x_axis_config={"include_numbers": False, "include_ticks": False}, axis_config = {"tip_shape": None, "color": text_black})
-
-        axes3.y_axis.set_opacity(0)
-
-        labels_axes3 = axes.get_axis_labels(MathTex(r"(\mathbb{R}, >)", color = text_black, stroke_width = 1.5).scale(0.8))
-
-        labels_axes3[0].set_opacity(0)
-        labels_axes3[1].set_opacity(0)
-
-    # Points in graph 3
-
-        point_x3 = axes3.coords_to_point(-1.5, 0)
-        point_y3 = axes3.coords_to_point(3.5, 0)
-
-        dot_x3 = Dot(point_x3, color = node_orange, stroke_color = text_black, stroke_width = 1)
-        dot_y3 = Dot(point_y3, color = node_purple, stroke_color = text_black, stroke_width = 1)
+        label_right = (
+            Tex("Dynamically Consistent", font_size=70, stroke_width = 1.5)
+            .scale(0.6)
+            .set_color(text_black)
+            .move_to([3.5, 2.5, 0])
+        )
 
 
-    # Triangle 3
-
-        triangle_3 = Polygon(
-            [-1, 0.1, 0],
-            [-1, 0.6, 0],
-            [1, 0.1, 0],
-            color = node_blue, fill_opacity = 1).set_stroke(text_black, 2).set_sheen(0.5, RIGHT)
-
-        line3 = Line([1, 0.3,0], [-1, 0.8, 0], stroke_color = text_black, stroke_width = 2)
-
-    #Axes 4
-
-        axes4 = Axes(x_range =[-1.5,3.5], x_length= 2.5, tips = False, x_axis_config={"include_numbers": False, "include_ticks": False}, axis_config = {"tip_shape": None, "color": text_black})
-
-        axes4.y_axis.set_opacity(0)
-
-        labels_axes4 = axes4.get_axis_labels(MathTex(r"(\mathbb{R}, >)", color = text_black, stroke_width = 1.5).scale(0.8))
-
-        labels_axes4[0].set_opacity(0)
-        labels_axes4[1].set_opacity(0)
-
-    # Points in graph 4
-
-        point_x4 = axes4.coords_to_point(-1.5, 0)
-        point_y4 = axes4.coords_to_point(3.5, 0)
-
-        dot_x4 = Dot(point_x4, color = node_orange, stroke_color = text_black, stroke_width = 1)
-        dot_y4 = Dot(point_y4, color = node_purple, stroke_color = text_black, stroke_width = 1)
+        all_2D = (
+            Group(
+                function1D_heatmap_1,
+                function1D_heatmap_2,
+                function1D_heatmap_3,
+                function1D_heatmap_4,
+            )
+            .scale(0.9)
+            .shift(UP * 0.6)
+        )
 
 
-    # Triangle 4
+        all_3D = Group(
+            function2D_graph_1,
+            function2D_graph_2,
+            function2D_graph_3,
+            function2D_graph_4,
+        )
 
-        triangle_4 = Polygon(
-            [-1, 0.1, 0],
-            [-1, 0.3, 0],
-            [1, 0.1, 0],
-            color = node_blue, fill_opacity = 1).set_stroke(text_black, 2).set_sheen(0.5, RIGHT)
-
-        line4 = Line([1, 0.3,0], [-1, 0.5, 0], stroke_color = text_black, stroke_width = 2)
-
-    # Bottom triangles
-
-    # Triangle 5  
-
-        triangle5 = Polygon(
-            [0,0.8,0],
-            [-1.5, -1,0],
-            [1.5, -1, 0],
-            stroke_color = text_black, 
-            stroke_width = 2,
-            color = node_blue,
-            fill_opacity = 1
-            ).set_sheen(0.5, LEFT)
-
-        triangle5top = Polygon(
-            [0,1.5,0],
-            [-1.5, -0.5,0],
-            [1.5, 1, 0],
-            stroke_color = text_black, 
-            stroke_width = 2
+        labels = Group(
+            label_left,
+            label_right,
             )
 
-    # Triangle 6  
+        all_ = Group(all_2D, all_3D).center().shift(DOWN * 3)
 
-        triangle6 = Polygon(
-            [0,0.8,0],
-            [-1.5, -1,0],
-            [1.5, -1, 0],
-            stroke_color = text_black, 
-            stroke_width = 2,
-            color = node_blue,
-            fill_opacity = 1
-            ).set_sheen(0.5, RIGHT)
-
-        triangle6top = Polygon(
-            [0,1.5,0],
-            [-1.5, 0.8,0],
-            [1.5, -0.5, 0],
-            stroke_color = text_black, 
-            stroke_width = 2
-            )
-
-    # Triangle 7  
-
-        triangle7 = Polygon(
-            [0,0.8,0],
-            [-1.5, -1,0],
-            [1.5, -1, 0],
-            stroke_color = text_black, 
-            stroke_width = 2,
-            color = node_blue,
-            fill_opacity = 1
-            ).set_sheen(0.5, LEFT)
-
-        triangle7top = Polygon(
-            [0,1.5,0],
-            [-1.5, -0.5,0],
-            [1.7, 0.6, 0],
-            stroke_color = text_black, 
-            stroke_width = 2
-            )
-
-    # Triangle 8  
-
-        triangle8 = Polygon(
-            [0,0.8,0],
-            [-1.5, -1,0],
-            [1.5, -1, 0],
-            stroke_color = text_black, 
-            stroke_width = 2,
-            color = node_blue,
-            fill_opacity = 1
-            ).set_sheen(0.5, LEFT)
-
-        triangle8top = Polygon(
-            [0,1.2,0],
-            [-1.5, -0.5,0],
-            [1.7, 0.9, 0],
-            stroke_color = text_black, 
-            stroke_width = 2
-            )
-
-        label_left = Tex("Not Dynamically \\\\ Consistent", color = text_black, font_size = 70, stroke_width = 1.5).scale(0.6).to_edge(UL).shift(RIGHT * 1.5)
-
-        label_right = Tex("Dynamically \\\\ Consistent", color = text_black, font_size = 70, stroke_width = 1.5).scale(0.6).to_edge(UR).shift(LEFT * 1.5)
-
-
-        triangle_right_top = VGroup(line3, axes3, dot_x3, dot_y3, labels_axes3,  triangle_3).to_edge(UR).shift(LEFT * 2 + UP * 1)
-
-        triangle_right_top2 = VGroup(line4, axes4, dot_x4, dot_y4, labels_axes4, triangle_4).to_edge(UR).shift(RIGHT * 1 + UP * 1)
-
-        triangle_left_top = VGroup(line1, axes, dot_x, dot_y, labels_axes, triangle_1).to_edge(UL).shift(RIGHT * 3 + UP * 1)
-
-        triangle_left_top2 = VGroup(line2, axes2, dot_x2, dot_y2, labels_axes2, triangle_2).to_edge(UL).shift(UP * 1)
-
-        triangle_left_bot = VGroup(triangle5, triangle5top).to_edge(DL).shift(UP * 1)
-
-        triangle_left_bot2 = VGroup(triangle6, triangle6top).to_edge(DL).shift(RIGHT * 3.2 + UP * 1)
-
-        triangle_right_bot = VGroup(triangle7, triangle7top).to_edge(DR).shift(LEFT * 3.2 + UP * 1)
-
-        triangle_right_bot2 = VGroup(triangle8, triangle8top).to_edge(DR).shift(UP * 1)
-
-
-        self.add(triangle_right_top, triangle_right_top2, triangle_left_top, triangle_left_top2, triangle_left_bot, triangle_left_bot2, triangle_right_bot, triangle_right_bot2, label_right, label_left)
-        
-        #debug distance of objects with a grid
+        self.add(all_3D)
+        self.add_fixed_in_frame_mobjects(all_2D, labels)
+        #self.add_fixed_in_frame_mobjects(all_2D, labels, NumberPlane())
+        self.set_camera_orientation(phi=60 * DEGREES, theta=-90 * DEGREES)
+        # debug distance of objects with a grid
         #self.add(NumberPlane())
