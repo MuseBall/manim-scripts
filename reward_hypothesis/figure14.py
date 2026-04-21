@@ -74,7 +74,7 @@ class Graph(ThreeDScene):
         # Bottom right graph
         function2D_graph_1 = function2D_graph(lambda x, y: x / 2 + 2.5, points=True)
 
-        function2D_graph_1.shift(DOWN * 3.4 + RIGHT * 2.5).scale(0.7)
+        function2D_graph_1.shift(DOWN * 3.4 + RIGHT * 2.5).scale(0.6)
 
         label_right = (
             MathTex(r"x \succeq y", font_size=70)

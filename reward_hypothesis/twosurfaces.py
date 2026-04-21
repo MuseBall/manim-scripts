@@ -155,7 +155,7 @@ def function2D_graph2(
         axes.c2p(*p1 / 1.75, function(*p1) / 1.1),
         color=text_black,
         stroke_width=1,
-    )
+    ).set_opacity(0)
     liney = DashedLine(
         axes.c2p(*p2 / 1.75, 0),
         axes.c2p(*p2 / 1.75, function(*p2) / 1.1),

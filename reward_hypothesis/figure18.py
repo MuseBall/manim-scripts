@@ -14,6 +14,13 @@ python ./figure18.py
 from manim import *
 import numpy as np
 from nodes_and_arrows import make_arrow
+from plttriangle import (
+    function1D_graph,
+    function1D_heatmap,
+    function2D_graph,
+    function2D_heatmap,
+)
+from twosurfaces import function2D_graph2
 
 
 config.pixel_height = 1080
@@ -21,7 +28,7 @@ config.pixel_width = 1920
 config.frame_height = config.pixel_height / config.pixel_width * config.frame_width
 
 
-class Graph(Scene):
+class Graph(ThreeDScene):
     def construct(self):
 
         # hex code of colours
@@ -39,292 +46,193 @@ class Graph(Scene):
         # background rectangle with rounded corners
         background_rectangle = RoundedRectangle(color = "#d6e2e2", fill_opacity = 1, corner_radius = 0.7, height = 8, width = 8)
 
-    #Axes
+        ##### TOP LEFT GRAPH 17R
 
-        axes = Axes(x_range =[-1,1], x_length= 4, tips = False, x_axis_config={"include_numbers": False, "include_ticks": True}, axis_config = {"tip_shape": None, "color": text_black})
+        # Top left graph 1
 
-        axes.y_axis.set_opacity(0)
-
-        labels_axes = axes.get_axis_labels(MathTex("", color = text_black, stroke_width = 1.5).scale(0.8))
-
-        labels_axes[0].set_opacity(0)
-        labels_axes[1].set_opacity(0)
-
-    # Triangle left
-
-        triangle_5 = Polygon(
-            [-1.8, 0.1, 0],
-            [-1.8, 0.9, 0],
-            [-0.8, 0.9, 0],
-            [-0.8, 0.1, 0],
-            color = node_blue,
-            fill_opacity =1
-            ).set_stroke(text_black, 2)
-
-        triangle_6 = Polygon(
-            [1.8, 0.1, 0],
-            [1.8, 0.7, 0],
-            [1, 0.7, 0],
-            [1, 0.1, 0],
-            color = node_blue,
-            fill_opacity =1
-            ).set_stroke(text_black, 2)
-
-        line = Line([-0.8, 0.1,0], [1, 0.1, 0], stroke_color = node_blue, stroke_width = 3)
-
-        line1 = Line([-0.8, 0.5,0], [1, 0.5, 0], stroke_color = node_blue, stroke_width = 3)
-
-    # Triangle right
-        
-        triangleleft = Polygon(
-            [-1.8, 0.1, 0],
-            [-0.3, 1, 0],
-            [-0.3, 0.1, 0],
-            color = node_blue, 
-            fill_opacity = 1).set_sheen(0.5, DOWN)
-
-        triangleright = Polygon(
-            [-0.3, 0.1, 0],
-            [-0.3, 1, 0],
-            [1.8, 0.1, 0],
-            color = node_blue, 
-            fill_opacity = 1).set_sheen(0.5, UP)
-        
-        triangleoutline = Polygon(
-            [-1.8, 0.1, 0],
-            [-0.3, 1, 0],
-            [1.8, 0.1, 0]).set_stroke(text_black, 2)
-
-        triangle_2 = Polygon(
-            [-1.8, 0.5, 0],
-            [-0.1, 0.7, 0],
-            [-0.1, 1.3, 0]
-            ).set_stroke(text_black, 2)
-
-        triangle_3 = Polygon(
-            [0.1, 1, 0],
-            [-0.1, 0.7, 0],
-            [-0.1, 1.3, 0],
-            color = "#739b99",
-            fill_opacity = 1
-            ).set_stroke(text_black, 2)
-        
-        triangle_4 = Polygon(
-            [0.1, 1, 0],
-            [2.2, 1.4, 0],
-            [-0.1, 1.3, 0] 
-            ).set_stroke(text_black, 2)
-        
-
-        label_top = Tex("Not Continuous", font_size = 75).scale(0.6).set_color(text_black).move_to([0,3,0])
-
-        label_bot = Tex("Continuous", font_size = 75).scale(0.6).set_color(text_black).move_to([0,0,0])
-
-    # Triangle bottom right
-
-        triangle_7 = Polygon(
-            [3, -1.5, 0],
-            [1, -3, 0],
-            [5, -3, 0],
-            color = node_blue,
-            fill_opacity = 1
-            ).set_stroke(text_black, 2).set_sheen(0.5, LEFT)
-
-
-        triangle_8 = Polygon(
-            [3, -1, 0],
-            [1, -2, 0],
-            [5, -1, 0]
-            ).set_stroke(text_black, 2)
-
-        
-        #Axes
-
-        axes2 = Axes(x_range =[-1,1], x_length= 4, tips = False, x_axis_config={"include_numbers": False, "include_ticks": True}, axis_config = {"tip_shape": None, "color": text_black})
-
-        axes2.y_axis.set_opacity(0)
-
-        labels_axes2 = axes2.get_axis_labels(MathTex("", color = text_black, stroke_width = 1.5).scale(0.8))
-
-        labels_axes2[0].set_opacity(0)
-        labels_axes2[1].set_opacity(0)
-
-    # Triangle bot left
-
-        triangle_9 = Polygon(
-            [-1.8, 0.1, 0],
-            [1.8, 0.7, 0],
-            [1.8, 0.1, 0],
-            color = node_blue,
-            fill_opacity =1
-            ).set_stroke(text_black, 2).set_sheen(0.5, LEFT)
-
-    #Axes
-
-        axes3 = Axes(x_range =[-1,1], x_length= 4, tips = False, x_axis_config={"include_numbers": False, "include_ticks": True}, axis_config = {"tip_shape": None, "color": text_black})
-
-        axes3.y_axis.set_opacity(0)
-
-        labels_axes3 = axes3.get_axis_labels(MathTex("", color = text_black, stroke_width = 1.5).scale(0.8))
-
-        labels_axes3[0].set_opacity(0)
-        labels_axes3[1].set_opacity(0)
-
-    # Triangle
-
-        triangle_outline_1 = Polygon(
-            [-1.8, 0.1, 0],
-            [0.6, 0.7, 0],
-            [1.8, 0.1, 0]
-            ).set_stroke(text_black, 2)
-
-        triangle_left_1 = Polygon(
-            [-1.8, 0.1, 0],
-            [0.6, 0.7, 0],
-            [0.6, 0.1, 0],
-            color = node_blue, fill_opacity = 1).set_sheen(0.5, LEFT)
-
-        triangle_right_1 = Polygon(
-            [0.6, 0.1, 0],
-            [0.6, 0.7, 0],
-            [1.8, 0.1, 0],
-            color = node_blue, fill_opacity = 1).set_sheen(0.5, RIGHT)
-
-    # Triangle left top 2
-        
-        triangle_2_outline = Polygon(
-            [-1.8, 0.1, 0],
-            [0, 1, 0],
-            [1.8, 0.1, 0]
-            ).set_stroke(text_black, 2)
-
-        triangle_2_left = Polygon(
-            [-1.8, 0.1, 0],
-            [0, 1, 0],
-            [0, 0.1, 0],
-            color = node_blue, fill_opacity = 1).set_sheen(0.5, LEFT)
-
-        triangle_2_right = Polygon(
-            [0, 0.1, 0],
-            [0, 1, 0],
-            [1.8, 0.1, 0],
-            color = node_blue, fill_opacity = 1).set_sheen(0.5, RIGHT)
-
-    # Polygon on top of triangle 2 in left top
-
-        polygon_2 = Polygon(
-            [-1.4, 0.6, 0],
-            [0, 1.3, 0],
-            [1.6,0.4,0 ],
-            [0.5, 1.8, 0],
-            [0, 2, 0], stroke_color = text_black, stroke_width =2
+        function1D_heatmap_1 = function1D_heatmap(
+            lambda x: x / 3 + 0,
         )
 
-        line_polygon2 = Line([0, 1.3, 0], [0.5, 1.8 ,0], stroke_color = text_black, stroke_width = 2)
+        function1D_heatmap_1.shift(LEFT * 3.8 + DOWN * 0.7).scale(0.8)
 
-        line_polygon2_2 = Line([-0.7, 1.3, 0], [0.25, 1.5 ,0], stroke_color = text_black, stroke_width = 2)
+        # Top left graph 2
+        function2D_graph_1 = function2D_graph(lambda x, y: x / 2 + 2.5, points=False)
 
-        line_polygon2_3 = Line([0.25, 1.5 ,0], [1.6, 0.4,0], stroke_color = text_black, stroke_width = 2)
+        function2D_graph_1.shift(LEFT * 0.1).scale(0.65)
 
-    # Botttom RIght graph
+        left_top = Group(
+            function1D_heatmap_1,
+            function2D_graph_1,
+            ).shift(UP * 0.5)
 
-    # Triangle left top 2
-        
-        triangle_outline_3 = Polygon(
-            [-1.8, 0.1, 0],
-            [0, 1, 0],
-            [1.8, 0.1, 0]
-            ).set_stroke(text_black, 2)
+        ##### TOP RIGHT GRAPH 15TL
 
-        triangle_left_3 = Polygon(
-            [-1.8, 0.1, 0],
-            [0, 1, 0],
-            [0, 0.1, 0],
-            color = node_blue, fill_opacity = 1).set_sheen(0.5, LEFT)
-
-        triangle_right_3 = Polygon(
-            [0, 0.1, 0],
-            [0, 1, 0],
-            [1.8, 0.1, 0],
-            color = node_blue, fill_opacity = 1).set_sheen(0.5, RIGHT)
-
-        triangle_top = Polygon(
-            [-1.8, 1.6, 0],
-            [-0.1, 0.3, 0],
-            [-0.1, 1, 0]
-            ).set_stroke(text_black, 2)
-
-        triangle_top2 = Polygon(
-            [0.8, 1, 0],
-            [-0.1, 0.3, 0],
-            [-0.1, 1, 0],
-            color = "#739b99",
-            fill_opacity = 1
-            ).set_stroke(text_black, 2)
-        
-        triangle_top3 = Polygon(
-            [0.8, 1, 0],
-            [1.7, 2.5, 0],
-            [-0.1, 1, 0] 
-            ).set_stroke(text_black, 2)
-
-
-        triangle_rightup = VGroup(triangle_2, triangle_3 ,triangle_4).shift(LEFT * 0.2)
-
-        triangle_right = VGroup(triangleleft, triangleright, triangleoutline, triangle_2, triangle_3 ,triangle_4).shift(RIGHT * 2.5)
-
-        triangle_leftbr = VGroup(triangle_5, axes.copy(), triangle_6, line, line1).shift(LEFT * 2.5)
-
-        triangle_rightbr = VGroup(triangle_left_3, triangle_right_3, triangle_outline_3).shift(RIGHT*2.5)
-
-        triangle_rightbrup = VGroup(triangle_top, triangle_top3, triangle_top2).shift(RIGHT *2.5)
-
-        triangle_left = VGroup(axes).shift(LEFT * 2.5)
-
-        triangle_left_top1 = VGroup(axes3 ,triangle_left_1, triangle_right_1, triangle_outline_1).shift(LEFT * 2.5)
-
-        triangle_left_top2 = VGroup(triangle_2_left, triangle_2_right, triangle_2_outline, polygon_2, line_polygon2).shift(RIGHT * 2.5)
-
-
-        triangle_bot_right = VGroup(triangle_7, triangle_8)
-
-        triangle_bot_left = VGroup(axes2, triangle_9).shift(LEFT * 2 + DOWN* 3)
-
-        triangle_top_right = VGroup(triangle_left_top1, triangle_left_top2)
-
-    # Table elements
-
-        top_left = VGroup(triangle_bot_right, triangle_bot_left).center()
-
-        bot_left = VGroup(triangle_rightup, triangle_right, triangle_left).center()
-
-        top_right = VGroup(triangle_top_right)
-
-        bot_right = VGroup(triangle_leftbr, triangle_rightbr, triangle_rightbrup)
-
-
-    # Table
-
-        table = Table(
-            [[top_left, top_right], [bot_left, bot_right]],
-            row_labels=[
-                Tex("Continuous", color=text_black, font_size=65),
-                Tex("Not \\\\ Continuous", color=text_black, font_size=65),
-            ],
-            col_labels=[
-                Tex("Independent", color=text_black, font_size=65),
-                Tex("Not \\\\ Independent", color=text_black, font_size=65),
-            ],
-            element_to_mobject=lambda m: m,
+        # Top right graph 1
+        function1D_heatmap_2 = function1D_heatmap(
+            lambda x: x / 2 if x < 2.5 else -x / 2 + 2.5
         )
 
-        table.scale(0.5).center()
-        table.get_horizontal_lines().set_color(text_black)
-        table.get_vertical_lines().set_color(text_black)
+        function1D_heatmap_2.shift(RIGHT * 1.8 + DOWN * 0.8).scale(0.8)
 
-        self.add(table)
+        # Top right graph 2
+        function2D_graph_2 = function2D_graph(
+            lambda x, y: x / 2 + 2 if x < 1 / 2 else -x / 2 + 2.5, line=True
+        )
+
+        function2D_graph_2.shift(RIGHT * 5.6).scale(0.7)
+
+        right_top = Group(
+            function1D_heatmap_2,
+            function2D_graph_2,
+            ).shift(UP * 0.5)
+
+        ##### BOTTOM RIGHT GRAPH (Similar to 17L)
+
+        # Bottom right graph
+        function1D_heatmap_3 = function1D_heatmap(
+            lambda x: 2 if x < 1.5 else (0 if x < 2.5 else 2) #x / 3 + 0
+        )
+        line2 = function1D_heatmap_3.graph.set_opacity(0)
+
+        function1D_heatmap_3.center().shift(RIGHT * 2.5 + DOWN * 2).scale(0.8)
+
+
+        graph, surface_graph, point1, point_bottom1, point_bottom_left1, triangle1_p1, triangle1_p2, triangle1_p3 = function2D_graph2(lambda x, y: x / 2 + 2.8)
+
+        graph2, surface_graph2, point2, point_bottom2, point_bottom_left2,  triangle2_p1, triangle2_p2, triangle2_p3 = function2D_graph2(
+            lambda x, y: y / 8 + 2.5, 
+            p1 = np.array([2, -1]),
+            p2 = np.array([0, -1]), # shared bottom
+            p3 = np.array([0, 2]) )
+
+        surface_graph2.rotate(0.5, axis=[0, 0, 1], about_point=point2)
+        surface_graph.rotate(-0.5, axis=[0, 0, 1], about_point=point2)
+
+        #line_between_points = Line(point_bottom1, point_bottom2, stroke_width = 10, stroke_color = text_black)
+
+        dot_point_bottom1 = Dot(point=point_bottom1, color=RED).set_opacity(0).rotate(-0.5, axis=[0, 0, 1], about_point=point2)
+        dot_point_bottom2 = Dot(point=point_bottom_left1, color=BLUE).rotate(0.1, axis=[0, 0, 1], about_point=point2).set_opacity(0)
+
+        triangle_outline = Polygon(triangle1_p1, triangle1_p3, triangle2_p1).set_stroke(text_black, 1.5)
+
+        triangle_outline1 = Polygon(
+            point2, 
+            point_bottom1 - [1.6, -0.4, 0], 
+            dot_point_bottom2.get_center() - [-0.9, 0.15, 0]
+            ).set_fill("#436f6d", 1).set_stroke("#436f6d", 1)
+
+        graph_bottom_right = Group(graph, graph2, triangle_outline, triangle_outline1).shift(RIGHT * 4.5 + DOWN * 5.2).scale(0.7)
+
+        bottom_right = Group(
+            function1D_heatmap_3,
+            graph_bottom_right,
+            ).shift(DOWN * -0.5 + LEFT * 0.5)
+
+
+        ##### BOTTOM LEFT 17L
+
+        # Bottom left graph
+        function1D_heatmap_4 = function1D_heatmap(
+            lambda x: 2 if x < 1.5 else (0 if x < 2.5 else 2) #x / 3 + 0
+        )
+        line2 = function1D_heatmap_4.graph.set_opacity(0)
+
+        function1D_heatmap_4.shift(LEFT * 4.3 + DOWN * 0.1).scale(0.8)
+
+
+        graph3, surface_graph3, point3, point_bottom3, point_bottom_left3, triangle3_p3, triangle3_p2, triangle3_p1 = function2D_graph2(lambda x, y: x / 2 + 2.8)
+
+        graph4, surface_graph4, point4, point_bottom4, point_bottom_left4,  triangle4_p1, triangle4_p2, triangle4_p3 = function2D_graph2(
+            lambda x, y: y / 8 + 2.5, 
+            p1 = np.array([2, -1]),
+            p2 = np.array([0, -1]), # shared bottom
+            p3 = np.array([0, 2]) )
+
+        surface_graph4.rotate(0.1, axis=[0, 0, 1], about_point=point4)
+
+        #line_between_points = Line(point_bottom1, point_bottom2, stroke_width = 10, stroke_color = text_black)
+
+        dot_point_bottom3 = Dot(point=point_bottom3, color=RED).set_opacity(0)
+        dot_point_bottom4 = Dot(point=point_bottom_left4, color=BLUE).rotate(0.1, axis=[0, 0, 1], about_point=point4).set_opacity(0)
+
+        triangle_outline34 = Polygon(triangle3_p1, triangle3_p3, triangle4_p1).set_stroke(text_black, 1.5)
+
+        triangle_outline341 = Polygon(
+            point4, 
+            point_bottom3 - [0, -0.1, 0], 
+            dot_point_bottom4.get_center() - [0.01, 0, 0]
+            ).set_fill("#436f6d", 1).set_stroke("#436f6d", 1)
+
+        graph_bottom_left = Group(graph3, graph4, triangle_outline34, triangle_outline341).shift(LEFT * -0.1 + DOWN * 2).scale(0.7)
+
+        bottom_left = Group(
+            function1D_heatmap_4,
+            graph_bottom_left,
+            ).shift(DOWN * 2.5)
+
+
+        # Table
         
-        #debug distance of objects with a grid
-        #self.add(NumberPlane())
+        row1 = Tex(
+            "Continuous", 
+            color=text_black, 
+            font_size=65
+            ).scale(0.7).move_to([-5.6,1,0])
+
+        row2 = Tex(
+            "Not \\\\ Continuous", 
+            color=text_black, 
+            font_size=65
+            ).scale(0.7).move_to([-5.6,-2,0])
+
+        col1 = Tex(
+            "Independent", 
+            color=text_black, 
+            font_size=65
+            ).scale(0.7).move_to([-1.3,3,0])
+
+        col2 = Tex(
+            "Not Independent",
+            color=text_black, 
+            font_size=65
+            ).scale(0.7).move_to([4.3,3,0])
+
+        #left_top.move_to([-1.3,1,0]).scale(0.85)
+        #right_top.move_to([4.3,1,0]).scale(0.85)
+        #bottom_left.move_to([-1.3,-2,0]).scale(0.7)
+        #bottom_right.move_to([3.4,-4,0]).scale(0.65)
+
+        left_top.scale(0.85)
+        right_top.scale(0.85)
+        bottom_left.scale(0.65)
+        bottom_right.scale(0.65)
+
+        line_row1 = Line([-4, 3.5, 0], [-4, -3.5,0], stroke_width = 3, stroke_color = text_black)
+        line_row1.set_cap_style(CapStyleType.ROUND)
+
+        line_row2 = Line([1.5, 3.5, 0], [1.5, -3.5,0], stroke_width = 3, stroke_color = text_black)
+        line_row2.set_cap_style(CapStyleType.ROUND)
+
+        line_col1 = Line([-7, 2.5, 0], [7, 2.5,0], stroke_width = 3, stroke_color = text_black)
+        line_col1.set_cap_style(CapStyleType.ROUND)
+
+        line_col2 = Line([-7, -0.5, 0], [7, -0.5,0], stroke_width = 3, stroke_color = text_black)
+        line_col2.set_cap_style(CapStyleType.ROUND)
+    
+        all_3D = Group(
+            function2D_graph_1,
+            function2D_graph_2,
+            graph_bottom_left,
+            graph_bottom_right
+        )
+
+        all_2D = Group(row1, row2, col1, col2, line_row1, line_row2, line_col1, line_col2, function1D_heatmap_1, function1D_heatmap_2, function1D_heatmap_3, function1D_heatmap_4)
+
+        self.add(all_3D)
+        #self.add_fixed_in_frame_mobjects(table)
+        self.add_fixed_in_frame_mobjects(all_2D)
+        self.set_camera_orientation(phi=60 * DEGREES, theta=-90 * DEGREES)
+    
 
 

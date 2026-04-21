@@ -14,6 +14,9 @@ python ./figure17.py
 from manim import *
 import numpy as np
 from nodes_and_arrows import make_arrow
+from plttriangle import function1D_heatmap, function2D_graph, function2D_heatmap
+from twosurfaces import function2D_graph2
+
 
 
 config.pixel_height = 1080
@@ -21,7 +24,7 @@ config.pixel_width = 1920
 config.frame_height = config.pixel_height / config.pixel_width * config.frame_width
 
 
-class Graph(Scene):
+class Graph(ThreeDScene):
     def construct(self):
 
         # hex code of colours
@@ -39,142 +42,98 @@ class Graph(Scene):
         # background rectangle with rounded corners
         background_rectangle = RoundedRectangle(color = "#d6e2e2", fill_opacity = 1, corner_radius = 0.7, height = 8, width = 8)
 
-    #Axes
+    # Top left graph
+        function1D_heatmap_1 = function1D_heatmap(
+            lambda x: 2 if x < 1.5 else (0 if x < 2.5 else 2) #x / 3 + 0
+        )
+        line2 = function1D_heatmap_1.graph.set_opacity(0)
 
-        axes = Axes(x_range =[-1,1], x_length= 4, tips = False, x_axis_config={"include_numbers": False, "include_ticks": True}, axis_config = {"tip_shape": None, "color": text_black})
-
-        axes.y_axis.set_opacity(0)
-
-        labels_axes = axes.get_axis_labels(MathTex("", color = text_black, stroke_width = 1.5).scale(0.8))
-
-        labels_axes[0].set_opacity(0)
-        labels_axes[1].set_opacity(0)
-
-    # Triangle left
-
-        triangle_5 = Polygon(
-            [-1.8, 0.1, 0],
-            [-1.8, 0.9, 0],
-            [-0.8, 0.9, 0],
-            [-0.8, 0.1, 0],
-            color = node_blue,
-            fill_opacity =1
-            ).set_stroke(text_black, 2)
-
-        triangle_6 = Polygon(
-            [1.8, 0.1, 0],
-            [1.8, 0.7, 0],
-            [1, 0.7, 0],
-            [1, 0.1, 0],
-            color = node_blue,
-            fill_opacity =1
-            ).set_stroke(text_black, 2)
-
-        line = Line([-0.8, 0.1,0], [1, 0.1, 0], stroke_color = node_blue, stroke_width = 3)
-
-        line1 = Line([-0.8, 0.5,0], [1, 0.5, 0], stroke_color = node_blue, stroke_width = 3)
-
-    # Triangle right
-        
-        triangleleft = Polygon(
-            [-1.8, 0.1, 0],
-            [-0.3, 1, 0],
-            [-0.3, 0.1, 0],
-            color = node_blue, 
-            fill_opacity = 1).set_sheen(0.5, DOWN)
-
-        triangleright = Polygon(
-            [-0.3, 0.1, 0],
-            [-0.3, 1, 0],
-            [1.8, 0.1, 0],
-            color = node_blue, 
-            fill_opacity = 1).set_sheen(0.5, UP)
-        
-        triangleoutline = Polygon(
-            [-1.8, 0.1, 0],
-            [-0.3, 1, 0],
-            [1.8, 0.1, 0]).set_stroke(text_black, 2)
-
-        triangle_2 = Polygon(
-            [-1.8, 0.5, 0],
-            [-0.1, 0.7, 0],
-            [-0.1, 1.3, 0]
-            ).set_stroke(text_black, 2)
-
-        triangle_3 = Polygon(
-            [0.1, 1, 0],
-            [-0.1, 0.7, 0],
-            [-0.1, 1.3, 0],
-            color = "#739b99",
-            fill_opacity = 1
-            ).set_stroke(text_black, 2)
-        
-        triangle_4 = Polygon(
-            [0.1, 1, 0],
-            [2.2, 1.4, 0],
-            [-0.1, 1.3, 0] 
-            ).set_stroke(text_black, 2)
-        
-
-        label_top = Tex("Not Continuous", font_size = 75).scale(0.6).set_color(text_black).move_to([0,3,0])
-
-        label_bot = Tex("Continuous", font_size = 75).scale(0.6).set_color(text_black).move_to([0,0,0])
-
-    # Triangle bottom right
-
-        triangle_7 = Polygon(
-            [3, -1.5, 0],
-            [1, -3, 0],
-            [5, -3, 0],
-            color = node_blue,
-            fill_opacity = 1
-            ).set_stroke(text_black, 2).set_sheen(0.5, LEFT)
+        function1D_heatmap_1.center().shift(LEFT * 2.5 + UP + 0.01).scale(0.8)
 
 
-        triangle_8 = Polygon(
-            [3, -1, 0],
-            [1, -2, 0],
-            [5, -1, 0]
-            ).set_stroke(text_black, 2)
+        graph, surface_graph, point1, point_bottom1, point_bottom_left1, triangle1_p1, triangle1_p2, triangle1_p3 = function2D_graph2(lambda x, y: x / 2 + 2.8)
 
-        
-        #Axes
+        graph2, surface_graph2, point2, point_bottom2, point_bottom_left2,  triangle2_p1, triangle2_p2, triangle2_p3 = function2D_graph2(
+            lambda x, y: y / 8 + 2.5, 
+            p1 = np.array([2, -1]),
+            p2 = np.array([0, -1]), # shared bottom
+            p3 = np.array([0, 2]) )
 
-        axes2 = Axes(x_range =[-1,1], x_length= 4, tips = False, x_axis_config={"include_numbers": False, "include_ticks": True}, axis_config = {"tip_shape": None, "color": text_black})
+        surface_graph2.rotate(0.1, axis=[0, 0, 1], about_point=point2)
 
-        axes2.y_axis.set_opacity(0)
+        #line_between_points = Line(point_bottom1, point_bottom2, stroke_width = 10, stroke_color = text_black)
 
-        labels_axes2 = axes2.get_axis_labels(MathTex("", color = text_black, stroke_width = 1.5).scale(0.8))
+        dot_point_bottom1 = Dot(point=point_bottom1, color=RED).set_opacity(0)
+        dot_point_bottom2 = Dot(point=point_bottom_left1, color=BLUE).rotate(0.1, axis=[0, 0, 1], about_point=point2).set_opacity(0)
 
-        labels_axes2[0].set_opacity(0)
-        labels_axes2[1].set_opacity(0)
+        triangle_outline = Polygon(triangle1_p1, triangle1_p3, triangle2_p1).set_stroke(text_black, 1.5)
 
-    # Triangle bot left
+        triangle_outline1 = Polygon(
+            point2, 
+            point_bottom1 - [0, -0.1, 0], 
+            dot_point_bottom2.get_center() - [0.1, 0.7, 0]
+            ).set_fill("#436f6d", 1).set_stroke("#436f6d", 1)
 
-        triangle_9 = Polygon(
-            [-1.8, 0.1, 0],
-            [1.8, 0.7, 0],
-            [1.8, 0.1, 0],
-            color = node_blue,
-            fill_opacity =1
-            ).set_stroke(text_black, 2).set_sheen(0.5, LEFT)
+        graph_top_right = Group(graph, graph2, triangle_outline, triangle_outline1).shift(RIGHT * 2.5 + UP * 0.5).scale(0.7)
 
 
-        triangle_rightup = VGroup(triangle_2, triangle_3 ,triangle_4).shift(LEFT * 0.2)
+    # Botoom left graph
+        function1D_heatmap_2 = function1D_heatmap(
+            lambda x: x / 3 + 0,
+        )
 
-        triangle_right = VGroup(triangleleft, triangleright, triangleoutline, triangle_2, triangle_3 ,triangle_4).shift(RIGHT * 3 + UP * 1)
+        function1D_heatmap_2.shift(DOWN * 3 + LEFT * 3.3).scale(0.8)
 
-        triangle_left = VGroup(triangle_5, axes, triangle_6, line, line1).shift(LEFT * 3 + UP *1)
+        # Bottom right graph
+        function2D_graph_2 = function2D_graph(lambda x, y: x / 2 + 2.5, points=False)
 
-        triangle_bot_right = VGroup(triangle_7, triangle_8).shift(UP* 0.5)
+        function2D_graph_2.shift(DOWN * 4.7 + RIGHT * 2).scale(0.5)
 
-        triangle_bot_left = VGroup(axes2, triangle_9).shift(LEFT * 3 + DOWN* 2.5)
-    
-        all_ = VGroup(triangle_right, triangle_left, label_top, label_bot, triangle_bot_right, triangle_bot_left)
+        label_head = (
+            Tex("Not Continous", font_size=75)
+            .scale(0.6)
+            .set_color(text_black)
+            .move_to([0, 3, 0])
+        )
+        label_head1 = (
+            Tex("Continous", font_size=75)
+            .scale(0.6)
+            .set_color(text_black)
+            .move_to([0, -0.5, 0])
+        )
 
-        self.add(all_)
-        
-        #debug distance of objects with a grid
-        #self.add(NumberPlane())
+
+        all_2D = Group(
+            function1D_heatmap_1,
+            function1D_heatmap_2,
+            label_head,
+            label_head1
+
+        )
+
+        """
+        all_3D = Group(
+            function2D_graph_1,
+            graph
+        )
+        """
+        # graph2.rotate(0.1, [0,0,1], about_point=surface_graph2.get_top())
+
+        all_3D = Group(
+            graph,
+            graph2,
+            triangle_outline1,
+            triangle_outline,
+            dot_point_bottom1,
+            dot_point_bottom2,
+            function2D_graph_2
+        )
+
+        self.add(all_3D)
+        self.add_fixed_in_frame_mobjects(all_2D)
+        self.set_camera_orientation(phi=60 * DEGREES, theta=-90 * DEGREES)
+        # debug distance of objects with a grid
+        # self.add(NumberPlane())
+
 
 
